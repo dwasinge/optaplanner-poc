@@ -10,13 +10,13 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>pocs.optaplanner.delivery.missions</groupId>
-	<artifactId>missions</artifactId>
+	<groupId>pocs.optaplanner.delivery.deliveries</groupId>
+	<artifactId>deliveries</artifactId>
 	<packaging>pom</packaging>
-	<name>Mission</name>
-	<description>Mission Parent</description>
+	<name>Deliveries</name>
+	<description>Deliveres Parent</description>
 
 	<modules>
-		<module>missions-domain</module>
+		<module>deliveries-domain</module>
 	</modules>
 </project>

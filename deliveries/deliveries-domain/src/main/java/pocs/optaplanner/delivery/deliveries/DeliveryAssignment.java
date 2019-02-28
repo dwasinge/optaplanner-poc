@@ -1,4 +1,4 @@
-package pocs.optaplanner.delivery.missions;
+package pocs.optaplanner.delivery.deliveries;
 
 import java.time.OffsetDateTime;
 
@@ -10,7 +10,7 @@ import pocs.optaplanner.delivery.aircrew.Aircrew;
 
 @Data
 @PlanningEntity
-public class MissionAssignment {
+public class DeliveryAssignment {
 
 	private String name;
 
@@ -23,18 +23,18 @@ public class MissionAssignment {
 	@PlanningVariable(valueRangeProviderRefs = { "availableAircrewRange" }, nullable = true)
 	private Aircrew aircrew;
 
-	private MissionRole missionRole;
+	private DeliveryRole deliveryRole;
 
-	public MissionAssignment() {
+	public DeliveryAssignment() {
 	}
 
-	public MissionAssignment(String name, String description, OffsetDateTime startTime, OffsetDateTime endTime,
-			MissionRole missionRole) {
+	public DeliveryAssignment(String name, String description, OffsetDateTime startTime, OffsetDateTime endTime,
+			DeliveryRole deliveryRole) {
 		this.name = name;
 		this.description = description;
 		this.startTime = startTime;
 		this.endTime = endTime;
-		this.missionRole = missionRole;
+		this.deliveryRole = deliveryRole;
 	}
 
 }

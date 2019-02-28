@@ -13,14 +13,14 @@
 		<module>delivery-scheduler-solver</module>
 		<module>aircrew</module>
 		<module>skills</module>
-		<module>missions</module>
+		<module>deliveries</module>
 	</modules>
 
 	<properties>
 
 		<delivery.aircrew.version>1.0.0-SNAPSHOT</delivery.aircrew.version>
 		<delivery.skills.version>1.0.0-SNAPSHOT</delivery.skills.version>
-		<delivery.missions.version>1.0.0-SNAPSHOT</delivery.missions.version>
+		<delivery.deliveries.version>1.0.0-SNAPSHOT</delivery.deliveries.version>
 
 		<optaplanner.version>7.17.0.Final</optaplanner.version>
 
@@ -45,9 +45,9 @@
 				<version>${delivery.skills.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>pocs.optaplanner.delivery.missions</groupId>
-				<artifactId>missions-domain</artifactId>
-				<version>${delivery.missions.version}</version>
+				<groupId>pocs.optaplanner.delivery.deliveries</groupId>
+				<artifactId>deliveries-domain</artifactId>
+				<version>${delivery.deliveries.version}</version>
 			</dependency>
 
 			<!-- Optaplanner -->

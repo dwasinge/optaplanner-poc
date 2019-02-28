@@ -1,4 +1,4 @@
-package pocs.optaplanner.delivery.missions;
+package pocs.optaplanner.delivery.deliveries;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +17,13 @@ import pocs.optaplanner.delivery.skills.Skill;
 
 @Data
 @PlanningSolution
-public class MissionSchedule {
+public class DeliverySchedule {
 
 	@ProblemFactCollectionProperty
 	private List<Skill> skillList = new ArrayList<>();
 
 	@ProblemFactCollectionProperty
-	private List<MissionRole> missionRoleList = new ArrayList<>();
+	private List<DeliveryRole> deliveryRoleList = new ArrayList<>();
 
 	@ValueRangeProvider(id = "availableAircrewRange")
 	@ProblemFactCollectionProperty
@@ -33,7 +33,7 @@ public class MissionSchedule {
 	private List<AircrewAvailability> aircrewAvailabilityList = new ArrayList<>();
 
 	@PlanningEntityCollectionProperty
-	private List<MissionAssignment> missionAssignmentList = new ArrayList<>();
+	private List<DeliveryAssignment> deliveryAssignmentList = new ArrayList<>();
 
 	@PlanningScore
 	private HardMediumSoftScore score = null;

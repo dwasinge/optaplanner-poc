@@ -1,6 +1,6 @@
 package pocs.optaplanner.delivery
 
-import pocs.optaplanner.delivery.missions.MissionAssignment;
+import pocs.optaplanner.delivery.deliveries.DeliveryAssignment;
 import pocs.optaplanner.delivery.aircrew.Aircrew;
 import pocs.optaplanner.delivery.aircrew.AircrewAvailability;
 import pocs.optaplanner.delivery.aircrew.AircrewAvailabilityState;
@@ -16,32 +16,32 @@ global HardMediumSoftScoreHolder scoreHolder;
 // Hard constraints
 // ############################################################################
 
-rule "Required Skill for a Mission Assignment"
+rule "Required Skill for a Delivery Assignment"
     when
-        MissionAssignment(
+        DeliveryAssignment(
                 aircrew != null,
-                !getAircrew().hasSkills(getMissionRole().getRequiredSkillSet()))
+                !getAircrew().hasSkills(getDeliveryRole().getRequiredSkillSet()))
     then
         scoreHolder.addHardConstraintMatch(kcontext, -100);
 end
 
-rule "Aircrew cannot Act as Multiple Roles For Same Mission"
+rule "Aircrew cannot Act as Multiple Roles For Same Delivery"
 	when
-		MissionAssignment(
+		DeliveryAssignment(
 			$n : name,
-			$mr : missionRole,
+			$dr : deliveryRole,
 			$a : aircrew != null
 		)
-		MissionAssignment(
+		DeliveryAssignment(
 			name == $n,
-			missionRole != $mr,
+			deliveryRole != $dr,
 			aircrew == $a
 		)
 	then
 		scoreHolder.addHardConstraintMatch(kcontext, -80);
 end
 
-rule "Aircrew Unavailable for Mission Assignment"
+rule "Aircrew Unavailable for Delivery Assignment"
 	when
 		AircrewAvailability(
 			state == AircrewAvailabilityState.UNAVAILABLE,
@@ -49,7 +49,7 @@ rule "Aircrew Unavailable for Mission Assignment"
 			$startTime : startTime,
 			$endTime : endTime
 		)
-		MissionAssignment(
+		DeliveryAssignment(
 			aircrew == $a,
 			DateTimeUtils.doTimeslotsIntersect($startTime,$endTime,
 												startTime, endTime)
@@ -62,9 +62,9 @@ end
 // Medium constraints
 // ############################################################################
 
-rule "Assign every Mission Assignment"
+rule "Assign every Delivery Assignment"
     when
-        MissionAssignment(aircrew == null)
+        DeliveryAssignment(aircrew == null)
     then
         scoreHolder.addMediumConstraintMatch(kcontext, -1);
 end

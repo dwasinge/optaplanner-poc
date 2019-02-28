@@ -5,14 +5,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>pocs.optaplanner.delivery.missions</groupId>
-		<artifactId>missions</artifactId>
+		<groupId>pocs.optaplanner.delivery.deliveries</groupId>
+		<artifactId>deliveries</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>missions-domain</artifactId>
-	<name>Missions Domain</name>
-	<description>Mission Domain Objects</description>
+	<artifactId>deliveries-domain</artifactId>
+	<name>Deliveries Domain</name>
+	<description>Deliveries Domain Objects</description>
 
 	<dependencies>
 		<dependency>
