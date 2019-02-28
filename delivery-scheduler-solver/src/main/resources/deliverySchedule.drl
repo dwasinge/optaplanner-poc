@@ -1,0 +1,70 @@
+package pocs.optaplanner.flight
+
+import puckboard.pocs.flight.MissionAssignment;
+import puckboard.pocs.flight.Aircrew;
+import puckboard.pocs.flight.AircrewAvailability;
+import puckboard.pocs.flight.AircrewAvailabilityState;
+
+import puckboard.pocs.flight.utils.DateTimeUtils;
+
+import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScoreHolder;
+
+global HardMediumSoftScoreHolder scoreHolder;
+
+
+// ############################################################################
+// Hard constraints
+// ############################################################################
+
+rule "Required Skill for a Mission Assignment"
+    when
+        MissionAssignment(
+                aircrew != null,
+                !getAircrew().hasSkills(getMissionRole().getRequiredSkillSet()))
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -100);
+end
+
+rule "Aircrew cannot Act as Multiple Roles For Same Mission"
+	when
+		MissionAssignment(
+			$n : name,
+			$mr : missionRole,
+			$a : aircrew != null
+		)
+		MissionAssignment(
+			name == $n,
+			missionRole != $mr,
+			aircrew == $a
+		)
+	then
+		scoreHolder.addHardConstraintMatch(kcontext, -80);
+end
+
+rule "Aircrew Unavailable for Mission Assignment"
+	when
+		AircrewAvailability(
+			state == AircrewAvailabilityState.UNAVAILABLE,
+			$a : aircrew,
+			$startTime : startTime,
+			$endTime : endTime
+		)
+		MissionAssignment(
+			aircrew == $a,
+			DateTimeUtils.doTimeslotsIntersect($startTime,$endTime,
+												startTime, endTime)
+		)
+	then
+		scoreHolder.addHardConstraintMatch(kcontext, -50);
+end
+
+// ############################################################################
+// Medium constraints
+// ############################################################################
+
+rule "Assign every Mission Assignment"
+    when
+        MissionAssignment(aircrew == null)
+    then
+        scoreHolder.addMediumConstraintMatch(kcontext, -1);
+end
