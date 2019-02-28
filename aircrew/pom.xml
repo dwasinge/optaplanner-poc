@@ -16,6 +16,7 @@
 
 	<modules>
 		<module>aircrew-domain</module>
+		<module>aircrew-service</module>
 	</modules>
 
 </project>

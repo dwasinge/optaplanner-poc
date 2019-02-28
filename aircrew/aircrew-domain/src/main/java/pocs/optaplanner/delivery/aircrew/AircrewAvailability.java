@@ -2,16 +2,22 @@ package pocs.optaplanner.delivery.aircrew;
 
 import java.time.OffsetDateTime;
 
+import javax.validation.constraints.NotNull;
+
 import lombok.Data;
 
 @Data
 public class AircrewAvailability {
 
+	@NotNull
 	private Aircrew aircrew;
 
+	@NotNull
 	private OffsetDateTime startTime;
+	@NotNull
 	private OffsetDateTime endTime;
 
+	@NotNull
 	private AircrewAvailabilityState state;
 
 	public AircrewAvailability() {

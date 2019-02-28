@@ -3,13 +3,20 @@ package pocs.optaplanner.delivery.aircrew;
 import java.util.Collection;
 import java.util.Set;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import lombok.Data;
 import pocs.optaplanner.delivery.skills.Skill;
 
 @Data
 public class Aircrew {
 
+	private Integer id;
+
+	@NotBlank
 	private String name;
+	@NotNull
 	private Set<Skill> skillProficiencySet;
 
 	public Aircrew() {
