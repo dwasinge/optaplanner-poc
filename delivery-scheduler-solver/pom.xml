@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>pocs.optaplanner</groupId>
+		<groupId>pocs.optaplanner.delivery</groupId>
 		<artifactId>delivery-scheduler-poc</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
@@ -23,7 +23,18 @@
 		<dependency>
 			<groupId>org.optaplanner</groupId>
 			<artifactId>optaplanner-core</artifactId>
-			<version>${optaplanner.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>pocs.optaplanner.delivery.aircrew</groupId>
+			<artifactId>aircrew-domain</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>pocs.optaplanner.delivery.skills</groupId>
+			<artifactId>skills-domain</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>pocs.optaplanner.delivery.missions</groupId>
+			<artifactId>missions-domain</artifactId>
 		</dependency>
 	</dependencies>
 

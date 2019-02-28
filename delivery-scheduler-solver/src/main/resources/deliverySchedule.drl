@@ -1,11 +1,11 @@
-package pocs.optaplanner.flight
+package pocs.optaplanner.delivery
 
-import puckboard.pocs.flight.MissionAssignment;
-import puckboard.pocs.flight.Aircrew;
-import puckboard.pocs.flight.AircrewAvailability;
-import puckboard.pocs.flight.AircrewAvailabilityState;
+import pocs.optaplanner.delivery.missions.MissionAssignment;
+import pocs.optaplanner.delivery.aircrew.Aircrew;
+import pocs.optaplanner.delivery.aircrew.AircrewAvailability;
+import pocs.optaplanner.delivery.aircrew.AircrewAvailabilityState;
 
-import puckboard.pocs.flight.utils.DateTimeUtils;
+import pocs.optaplanner.delivery.DateTimeUtils;
 
 import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScoreHolder;
 
