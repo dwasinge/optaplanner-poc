@@ -5,21 +5,19 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>pocs.optaplanner.delivery.aircrew</groupId>
-		<artifactId>aircrew</artifactId>
+		<groupId>pocs.optaplanner.delivery.skills</groupId>
+		<artifactId>skills</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>aircrew-service</artifactId>
-	<name>Aircrew Service</name>
-	<description>Service to maintain aircrew information</description>
+	<artifactId>skills-service</artifactId>
 
 	<dependencies>
 
 		<!-- Aircrew Domain -->
 		<dependency>
-			<groupId>pocs.optaplanner.delivery.aircrew</groupId>
-			<artifactId>aircrew-domain</artifactId>
+			<groupId>pocs.optaplanner.delivery.skills</groupId>
+			<artifactId>skills-domain</artifactId>
 		</dependency>
 
 		<!-- Spring -->

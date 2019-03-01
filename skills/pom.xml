@@ -16,5 +16,6 @@
 
 	<modules>
 		<module>skills-domain</module>
+		<module>skills-service</module>
 	</modules>
 </project>

@@ -1,12 +1,21 @@
 package pocs.optaplanner.delivery.skills;
 
+import javax.validation.constraints.NotBlank;
+
 import lombok.Data;
 
 @Data
 public class Skill {
 
+	private Integer id;
+
+	@NotBlank
 	private String code;
+
+	@NotBlank
 	private String name;
+
+	@NotBlank
 	private String description;
 
 	public Skill() {
@@ -17,5 +26,5 @@ public class Skill {
 		this.name = name;
 		this.description = description;
 	}
-	
+
 }
