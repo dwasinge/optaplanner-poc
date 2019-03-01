@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <solver>
 
-	<scanAnnotatedClasses />
+	<!-- Define the model -->
+	<solutionClass>pocs.optaplanner.delivery.deliveries.DeliverySchedule</solutionClass>
+	<entityClass>pocs.optaplanner.delivery.deliveries.DeliveryAssignment</entityClass>
+
+	<!-- <scanAnnotatedClasses /> -->
 
 	<scoreDirectorFactory>
 		<scoreDrl>deliverySchedule.drl</scoreDrl>
