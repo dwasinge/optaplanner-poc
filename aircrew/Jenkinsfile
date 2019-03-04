@@ -57,7 +57,7 @@ pipeline {
     // Run Maven build, skipping tests
     stage('Build'){
       steps {
-        sh "mvn -B clean deploy -DskipTests=true -f ${POM_FILE} -DaltDeploymentRepository=${MVN_SNAPSHOT_DEPLOYMENT_REPOSITORY}""
+        sh "mvn -B clean deploy -DskipTests=true -f ${POM_FILE} -DaltDeploymentRepository=${MVN_SNAPSHOT_DEPLOYMENT_REPOSITORY}"
       }
     }
 

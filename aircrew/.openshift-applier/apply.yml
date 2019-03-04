@@ -1,6 +1,6 @@
 ---
 - name: Deploy Spring Boot Application
-  hosts: seed-hosts
+  hosts: app
   vars:
     ci_cd_namespace: puckboard-dw-ci-cd
     dev_namespace: puckboard-dw-dev
