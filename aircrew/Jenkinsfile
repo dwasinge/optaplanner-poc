@@ -51,7 +51,7 @@ pipeline {
       steps {
 
         // run dependency check
-        sh "mvn dependency-check:aggregate -q -f ${POM_FILE}"
+        sh "mvn dependency-check:aggregate -X -f ${POM_FILE}"
 
         // publish dependency check report
         publishHTML(target: [
