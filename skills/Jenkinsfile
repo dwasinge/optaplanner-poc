@@ -82,8 +82,8 @@ pipeline {
     stage('Build Container Image'){
       steps {
 
-	binaryBuild(projectName: env.APP_NAME, sourceImagePath: env.BUILD, artifactsDirectoryName: "${env.UBER_JAR_CONTEXT_DIR}")
-  
+        binaryBuild(projectName: env.BUILD, buildConfigName: env.APP_NAME, artifactsDirectoryName: "${env.UBER_JAR_CONTEXT_DIR}");
+
       }
     }
 
