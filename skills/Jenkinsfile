@@ -9,13 +9,16 @@ retriever: modernSCM(
 openshift.withCluster() {
 
   env.NAMESPACE = openshift.project()
-  env.POM_FILE = env.PIPELINE_CONTEXT_DIR ? "${env.PIPELINE_CONTEXT_DIR}/pom.xml" : "pom.xml"
-  env.APP_NAME = "${env.JOB_NAME}".replaceAll(/-?${env.PROJECT_NAME}-?/, '').replaceAll(/-?pipeline-?/, '').replaceAll('/','')
+
   env.BUILD = "${env.NAMESPACE}"
   env.DEV = env.BUILD.replace('ci-cd', 'dev')
   env.TEST = env.BUILD.replace('ci-cd', 'test')
+
   env.MVN_SNAPSHOT_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus:8081/repository/maven-snapshots"
-  env.UBER_JAR_CONTEXT_DIR = env.PIPELINE_CONTEXT_DIR ? "${env.PIPELINE_CONTEXT_DIR}/${env.APP_NAME}/target/" : "${env.APP_NAME}/target/"
+
+  env.APP_NAME = "${env.JOB_NAME}".replaceAll(/-?${env.PROJECT_NAME}-?/, '').replaceAll(/-?pipeline-?/, '').replaceAll('/','')
+  env.POM_FILE = env.PIPELINE_CONTEXT_DIR ? "${env.PIPELINE_CONTEXT_DIR}/pom.xml" : "pom.xml"
+  env.BUILD_OUTPUT_DIR = env.PIPELINE_CONTEXT_DIR ? "${env.PIPELINE_CONTEXT_DIR}/${env.APP_NAME}/target/" : "${env.APP_NAME}/target/"
 
   echo "Starting Pipeline for ${APP_NAME}..."
 
@@ -39,52 +42,59 @@ pipeline {
 
     stage('Wait for Nexus') {
       steps {
-	sh 'printenv'
         verifyDeployment(targetApp: "nexus", projectName: env.BUILD)
+      }
+    }
+
+    stage('Check Dependencies'){
+      steps {
+
+        sh "mvn dependency-check:aggregate -q -f ${POM_FILE}"
+
+        publishHTML([  // Publish Dependency Check Report
+          allowMissing: false,
+          alwaysLinkToLastBuild: true,
+          keepAll: true,
+          reportDir: "${env.BUILD_OUTPUT_DIR}",
+          reportFiles: 'dependency-check-report.html',
+          reportName: 'OWASP Dependency Check Report'
+        ])
+
       }
     }
 
     // Run Maven build, skipping tests
     stage('Build'){
       steps {
-        sh "mvn -B clean deploy -DskipTests=true -f ${POM_FILE} -DaltDeploymentRepository=${MVN_SNAPSHOT_DEPLOYMENT_REPOSITORY}"
+
+        sh "mvn -B clean deploy -f ${POM_FILE} -DaltDeploymentRepository=${MVN_SNAPSHOT_DEPLOYMENT_REPOSITORY}"
+
+        publishHTML([  // Publish Unit Test Report
+          allowMissing: true,
+          alwaysLinkToLastBuild: false,
+          keepAll: true,
+          reportDir: "${env.BUILD_OUTPUT_DIR}/site/jacoco",
+          reportFiles: 'index.html',
+          reportName: 'Jacoco Unit Test Report'
+        ])
+
       }
     }
 
-    // Run Maven unit tests
-    stage('Unit Test'){
-      steps {
-        sh "mvn -B test -f ${POM_FILE}"
-      }
-    }
-
+    // Perform Static Code Analysis using SonarQube
     stage ('Code Analysis') {
         steps {
           sonarqubeStaticAnalysis(
             pomFile: "${POM_FILE}",
             buildServerWebHookName: "jenkins",
-            buildServerWebHookUrl: "${JENKINS_URL}sonarqube-webhook/",
-            dependencyCheckReportDir: "target",
-            dependencyCheckReportFiles: "dependency-check-report.html",
-            dependencyCheckReportName: "OWASP Dependency Check Report",
-            dependencyCheckKeepAll: true,
-            dependencyCheckAlwaysLinkToLastBuild: true,
-            dependencyCheckAllowMissing: true,
-            unitTestReportDir: "target/site/jacoco/",
-            unitTestReportFiles: "index.html",
-            unitTestReportName: "Jacoco Unit Test Report",
-            unitTestKeepAll: true,
-            unitTestAlwaysLinkToLastBuild: false,
-            unitTestAllowMissing: true)
+            buildServerWebHookUrl: "${JENKINS_URL}sonarqube-webhook/"
         }
     }
 
     // Build Container Image using the artifacts produced in previous stages
     stage('Build Container Image'){
       steps {
-
-        binaryBuild(projectName: env.BUILD, buildConfigName: env.APP_NAME, artifactsDirectoryName: "${env.UBER_JAR_CONTEXT_DIR}");
-
+        binaryBuild(projectName: env.BUILD, buildConfigName: env.APP_NAME, artifactsDirectoryName: "${env.BUILD_OUTPUT_DIR}");
       }
     }
 
