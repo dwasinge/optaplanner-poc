@@ -9,7 +9,7 @@ retriever: modernSCM(
 openshift.withCluster() {
 
   env.NAMESPACE = openshift.project()
-  env.POM_FILE = env.BUILD_CONTEXT_DIR ? "${env.BUILD_CONTEXT_DIR}/pom.xml" : "pom.xml"
+  env.POM_FILE = env.PIPELINE_CONTEXT_DIR ? "${env.PIPELINE_CONTEXT_DIR}/pom.xml" : "pom.xml"
   env.APP_NAME = "${env.JOB_NAME}".replaceAll(/-?${env.PROJECT_NAME}-?/, '').replaceAll(/-?pipeline-?/, '').replaceAll('/','')
   env.BUILD = "${env.NAMESPACE}"
   env.DEV = env.BUILD.replace('ci-cd', 'dev')
