@@ -17,7 +17,7 @@ import pocs.optaplanner.delivery.skills.Skill;
 import pocs.optaplanner.delivery.skills.service.SkillsService;
 
 @RestController
-@RequestMapping("/v1/api")
+@RequestMapping("/api/v1")
 public class SkillsResource {
 
 	private SkillsService service;
