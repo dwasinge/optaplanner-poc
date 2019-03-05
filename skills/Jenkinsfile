@@ -15,7 +15,7 @@ openshift.withCluster() {
   env.DEV = env.BUILD.replace('ci-cd', 'dev')
   env.TEST = env.BUILD.replace('ci-cd', 'test')
   env.MVN_SNAPSHOT_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus:8081/repository/maven-snapshots"
-  env.UBER_JAR_CONTEXT_DIR = "skills-service/target/"
+  env.UBER_JAR_CONTEXT_DIR = env.PIPELINE_CONTEXT_DIR ? "${env.PIPELINE_CONTEXT_DIR}/${env.APP_NAME}/target/" : "${env.APP_NAME}/target/"
 
   echo "Starting Pipeline for ${APP_NAME}..."
 
