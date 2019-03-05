@@ -35,21 +35,11 @@ pipeline {
   // Requeres at least one stage
   stages {
 
-    // Checkout source code
-    // This is required as Pipeline code is originally checked out
-    // so this will pull the application source code to this slave
-//    stage('Git Checkout Application') {
- //     steps {
-        // Turn off Git's SSL cert check, uncomment if needed
-        // sh 'git config --global http.sslVerify false'
-//        git url: "${APPLICATION_SOURCE_REPO}"
-//      }
-//    }
-
     //verify nexus is up
 
     stage('Wait for Nexus') {
       steps {
+	sh 'printenv'
         verifyDeployment(targetApp: "nexus", projectName: env.BUILD)
       }
     }
