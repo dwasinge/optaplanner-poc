@@ -12,10 +12,15 @@
 
 	<artifactId>aircrew-domain</artifactId>
 
+	<properties>
+		<skills.domain.version>1.0.0-SNAPSHOT</skills.domain.version>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>pocs.optaplanner.delivery.skills</groupId>
 			<artifactId>skills-domain</artifactId>
+			<version>${skills.domain.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>

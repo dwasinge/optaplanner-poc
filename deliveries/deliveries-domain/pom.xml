@@ -14,18 +14,30 @@
 	<name>Deliveries Domain</name>
 	<description>Deliveries Domain Objects</description>
 
+	<properties>
+
+		<skills.domain.version>1.0.0-SNAPSHOT</skills.domain.version>
+		<aircrew.domain.version>1.0.0-SNAPSHOT</aircrew.domain.version>
+
+		<optaplanner.version>7.17.0.Final</optaplanner.version>
+
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>pocs.optaplanner.delivery.aircrew</groupId>
 			<artifactId>aircrew-domain</artifactId>
+			<version>${aircrew.domain.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>pocs.optaplanner.delivery.skills</groupId>
 			<artifactId>skills-domain</artifactId>
+			<version>${skills.domain.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.optaplanner</groupId>
 			<artifactId>optaplanner-core</artifactId>
+			<version>${optaplanner.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>

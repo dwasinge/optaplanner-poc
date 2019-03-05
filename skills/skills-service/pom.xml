@@ -12,12 +12,19 @@
 
 	<artifactId>skills-service</artifactId>
 
+	<properties>
+
+		<skills.domain.version>1.0.0-SNAPSHOT</skills.domain.version>
+		<swagger.version>2.9.2</swagger.version>
+
+	</properties>
+
 	<dependencies>
 
-		<!-- Aircrew Domain -->
 		<dependency>
 			<groupId>pocs.optaplanner.delivery.skills</groupId>
 			<artifactId>skills-domain</artifactId>
+			<version>${skills.domain.version}</version>
 		</dependency>
 
 		<!-- Spring -->
@@ -39,10 +46,12 @@
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
+			<version>${swagger.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${swagger.version}</version>
 		</dependency>
 
 		<!-- Test -->
