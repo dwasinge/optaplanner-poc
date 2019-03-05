@@ -11,6 +11,8 @@ target
 bin
 tmp
 
+.factorypath
+
 
 /target/
 

@@ -1,0 +1,5 @@
+NAME: skills-service
+PIPELINE_SOURCE_REPOSITORY_URL: https://github.com/dwasinge/optaplanner-poc.git
+PIPELINE_SOURCE_REPOSITORY_REF= master
+PIPELINE_CONTEXT_DIR: skills
+
