@@ -18,7 +18,8 @@ openshift.withCluster() {
 
   env.APP_NAME = "${env.JOB_NAME}".replaceAll(/-?${env.PROJECT_NAME}-?/, '').replaceAll(/-?pipeline-?/, '').replaceAll('/','')
   env.POM_FILE = env.PIPELINE_CONTEXT_DIR ? "${env.PIPELINE_CONTEXT_DIR}/pom.xml" : "pom.xml"
-  env.BUILD_OUTPUT_DIR = env.PIPELINE_CONTEXT_DIR ? "${env.PIPELINE_CONTEXT_DIR}/${env.APP_NAME}/target/" : "${env.APP_NAME}/target/"
+  env.PARENT_BUILD_OUTPUT_DIR = env.PIPELINE_CONTEXT_DIR ? "${env.PIPELINE_CONTEXT_DIR}/target" : "target"
+  env.APP_SERVICE_OUTPUT_DIR = env.PIPELINE_CONTEXT_DIR ? "${env.PIPELINE_CONTEXT_DIR}/${env.APP_NAME}/target/" : "${env.APP_NAME}/target/"
 
   echo "Starting Pipeline for ${APP_NAME}..."
 
@@ -54,7 +55,7 @@ pipeline {
 
         // publish dependency check report
         publishHTML(target: [
-            reportDir            : 'target',
+            reportDir            : "${env.PARENT_BUILD_OUTPUT_DIR}",
             reportFiles          : 'dependency-check-report.html',
             reportName           : 'OWASP Dependency Check Report',
             keepAll              : true,
@@ -99,7 +100,7 @@ pipeline {
     // Build Container Image using the artifacts produced in previous stages
     stage('Build Container Image'){
       steps {
-        binaryBuild(projectName: env.BUILD, buildConfigName: env.APP_NAME, artifactsDirectoryName: "${env.BUILD_OUTPUT_DIR}");
+        binaryBuild(projectName: env.BUILD, buildConfigName: env.APP_NAME, artifactsDirectoryName: "${env.APP_SERVICE_OUTPUT_DIR}");
       }
     }
 
