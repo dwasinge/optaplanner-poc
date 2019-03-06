@@ -90,8 +90,7 @@ pipeline {
         steps {
           sonarqubeStaticAnalysis(
             pomFile: "${POM_FILE}",
-            buildServerWebHookName: "jenkins",
-            buildServerWebHookUrl: "${JENKINS_URL}sonarqube-webhook/"
+            buildServerWebHookName: "jenkins"
           )
         }
     }
