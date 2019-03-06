@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.stereotype.Component;
 
-import pocs.optaplanner.delivery.skills.Skill;
+import pocs.optaplanner.delivery.skills.domain.Skill;
 
 @Component
 public class MapRepository {

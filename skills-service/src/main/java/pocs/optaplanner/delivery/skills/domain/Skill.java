@@ -1,4 +1,4 @@
-package pocs.optaplanner.delivery.skills;
+package pocs.optaplanner.delivery.skills.domain;
 
 import javax.validation.constraints.NotBlank;
 

@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import pocs.optaplanner.delivery.skills.Skill;
+import pocs.optaplanner.delivery.skills.domain.Skill;
 import pocs.optaplanner.delivery.skills.exception.RepositoryException;
 import pocs.optaplanner.delivery.skills.exception.ResourceAlreadyExistsException;
 import pocs.optaplanner.delivery.skills.exception.ResourceNotFoundException;

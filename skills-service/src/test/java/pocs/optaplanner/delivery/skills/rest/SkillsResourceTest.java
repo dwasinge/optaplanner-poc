@@ -9,10 +9,9 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import pocs.optaplanner.delivery.skills.Skill;
+import pocs.optaplanner.delivery.skills.domain.Skill;
 import pocs.optaplanner.delivery.skills.repository.MapRepository;
 import pocs.optaplanner.delivery.skills.service.SkillsService;
 import pocs.optaplanner.delivery.skills.utils.TestUtils;

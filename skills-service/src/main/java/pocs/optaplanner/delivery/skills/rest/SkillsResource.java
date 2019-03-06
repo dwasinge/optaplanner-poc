@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import pocs.optaplanner.delivery.skills.Skill;
+import pocs.optaplanner.delivery.skills.domain.Skill;
 import pocs.optaplanner.delivery.skills.service.SkillsService;
 
 @RestController
