@@ -40,6 +40,7 @@ pipeline {
   stages {
 
     //verify nexus is up
+
     stage('Wait for Nexus') {
       steps {
         verifyDeployment(targetApp: "nexus", projectName: env.BUILD)
@@ -90,7 +91,8 @@ pipeline {
         steps {
           sonarqubeStaticAnalysis(
             pomFile: "${POM_FILE}",
-            buildServerWebHookName: "jenkins"
+            buildServerWebHookName: "jenkins",
+            buildServerWebHookUrl: "${JENKINS_URL}sonarqube-webhook/"
           )
         }
     }
