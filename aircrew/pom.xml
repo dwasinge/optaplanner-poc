@@ -77,4 +77,19 @@
 		</plugins>
 	</build>
 
+	<repositories>
+		<repository>
+			<id>maven-public</id>
+			<name>Maven Public Repository</name>
+			<url>http://nexus:8081/repository/maven-public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+
 </project>
