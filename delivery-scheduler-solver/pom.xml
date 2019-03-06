@@ -11,12 +11,9 @@
 
 	<properties>
 
-		<skills.domain.version>1.0.0-SNAPSHOT</skills.domain.version>
-		<aircrew.domain.version>1.0.0-SNAPSHOT</aircrew.domain.version>
-		<deliveries.domain.version>1.0.0-SNAPSHOT</deliveries.domain.version>
-
 		<optaplanner.version>7.17.0.Final</optaplanner.version>
-
+		<lombok.version>1.18.4</lombok.version>
+		<javax.validation.version>2.0.1.Final</javax.validation.version>
 		<junit.version>4.12</junit.version>
 
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -25,26 +22,28 @@
 	</properties>
 
 	<dependencies>
+
+		<!-- Optaplanner -->
 		<dependency>
 			<groupId>org.optaplanner</groupId>
 			<artifactId>optaplanner-core</artifactId>
 			<version>${optaplanner.version}</version>
 		</dependency>
+
+		<!-- Other -->
 		<dependency>
-			<groupId>pocs.optaplanner.delivery.aircrew</groupId>
-			<artifactId>aircrew-domain</artifactId>
-			<version>${aircrew.domain.version}</version>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>pocs.optaplanner.delivery.skills</groupId>
-			<artifactId>skills-domain</artifactId>
-			<version>${skills.domain.version}</version>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>${javax.validation.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>pocs.optaplanner.delivery.deliveries</groupId>
-			<artifactId>deliveries-domain</artifactId>
-			<version>${deliveries.domain.version}</version>
-		</dependency>
+
+		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

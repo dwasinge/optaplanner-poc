@@ -7,12 +7,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import pocs.optaplanner.delivery.aircrew.Aircrew;
-import pocs.optaplanner.delivery.aircrew.AircrewAvailability;
-import pocs.optaplanner.delivery.aircrew.AircrewAvailabilityState;
-import pocs.optaplanner.delivery.deliveries.DeliveryAssignment;
-import pocs.optaplanner.delivery.deliveries.DeliveryRole;
-import pocs.optaplanner.delivery.skills.Skill;
+import pocs.optaplanner.delivery.domain.DeliveryAssignment;
+import pocs.optaplanner.delivery.domain.DeliveryRole;
+import pocs.optaplanner.delivery.domain.aircrew.Aircrew;
+import pocs.optaplanner.delivery.domain.aircrew.AircrewAvailability;
+import pocs.optaplanner.delivery.domain.aircrew.AircrewAvailabilityState;
+import pocs.optaplanner.delivery.domain.skills.Skill;
 
 public class MockUtils {
 

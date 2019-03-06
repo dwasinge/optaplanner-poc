@@ -1,9 +1,9 @@
-package pocs.optaplanner.delivery
+package pocs.optaplanner.delivery;
 
-import pocs.optaplanner.delivery.deliveries.DeliveryAssignment;
-import pocs.optaplanner.delivery.aircrew.Aircrew;
-import pocs.optaplanner.delivery.aircrew.AircrewAvailability;
-import pocs.optaplanner.delivery.aircrew.AircrewAvailabilityState;
+import pocs.optaplanner.delivery.domain.DeliveryAssignment;
+import pocs.optaplanner.delivery.domain.aircrew.Aircrew;
+import pocs.optaplanner.delivery.domain.aircrew.AircrewAvailability;
+import pocs.optaplanner.delivery.domain.aircrew.AircrewAvailabilityState;
 
 import pocs.optaplanner.delivery.DateTimeUtils;
 

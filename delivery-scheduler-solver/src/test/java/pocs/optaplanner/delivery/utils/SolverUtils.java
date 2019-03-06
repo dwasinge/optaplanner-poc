@@ -3,7 +3,7 @@ package pocs.optaplanner.delivery.utils;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 
-import pocs.optaplanner.delivery.deliveries.DeliverySchedule;
+import pocs.optaplanner.delivery.domain.DeliverySchedule;
 
 public class SolverUtils {
 

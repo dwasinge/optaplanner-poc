@@ -2,8 +2,8 @@
 <solver>
 
 	<!-- Define the model -->
-	<solutionClass>pocs.optaplanner.delivery.deliveries.DeliverySchedule</solutionClass>
-	<entityClass>pocs.optaplanner.delivery.deliveries.DeliveryAssignment</entityClass>
+	<solutionClass>pocs.optaplanner.delivery.domain.DeliverySchedule</solutionClass>
+	<entityClass>pocs.optaplanner.delivery.domain.DeliveryAssignment</entityClass>
 
 	<!-- <scanAnnotatedClasses /> -->
 
