@@ -1,9 +1,9 @@
-package pocs.optaplanner.delivery.deliveries;
+package pocs.optaplanner.delivery.domain;
 
 import java.util.Set;
 
 import lombok.Data;
-import pocs.optaplanner.delivery.skills.Skill;
+import pocs.optaplanner.delivery.domain.skills.Skill;
 
 @Data
 public class DeliveryRole {

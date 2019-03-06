@@ -1,4 +1,4 @@
-package pocs.optaplanner.delivery.deliveries;
+package pocs.optaplanner.delivery.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +11,9 @@ import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScore;
 
 import lombok.Data;
-import pocs.optaplanner.delivery.aircrew.Aircrew;
-import pocs.optaplanner.delivery.aircrew.AircrewAvailability;
-import pocs.optaplanner.delivery.skills.Skill;
+import pocs.optaplanner.delivery.domain.aircrew.Aircrew;
+import pocs.optaplanner.delivery.domain.aircrew.AircrewAvailability;
+import pocs.optaplanner.delivery.domain.skills.Skill;
 
 @Data
 @PlanningSolution

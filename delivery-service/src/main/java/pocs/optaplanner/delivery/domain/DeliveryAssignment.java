@@ -1,4 +1,4 @@
-package pocs.optaplanner.delivery.deliveries;
+package pocs.optaplanner.delivery.domain;
 
 import java.time.OffsetDateTime;
 
@@ -6,7 +6,7 @@ import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 
 import lombok.Data;
-import pocs.optaplanner.delivery.aircrew.Aircrew;
+import pocs.optaplanner.delivery.domain.aircrew.Aircrew;
 
 @Data
 @PlanningEntity
