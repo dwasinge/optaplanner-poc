@@ -8,11 +8,11 @@
 	<!-- <scanAnnotatedClasses /> -->
 
 	<scoreDirectorFactory>
-		<scoreDrl>deliverySchedule.drl</scoreDrl>
+		<scoreDrl>pocs/optaplanner/delivery/deliverySchedule.drl</scoreDrl>
 	</scoreDirectorFactory>
 
 	<termination>
-		<secondsSpentLimit>10</secondsSpentLimit>
+		<secondsSpentLimit>5</secondsSpentLimit>
 	</termination>
 
 </solver>

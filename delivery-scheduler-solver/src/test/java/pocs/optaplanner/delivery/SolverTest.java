@@ -46,7 +46,7 @@ public class SolverTest {
 		unsolvedSchedule.getSkillList().addAll(MockUtils.createSkillList());
 
 		DeliverySchedule solvedSchedule = SolverUtils.assignAircrewToDelivery(unsolvedSchedule,
-				"deliveryScheduleSolver.xml");
+				"pocs/optaplanner/delivery/deliveryScheduleSolver.xml");
 		Assert.assertNotNull(solvedSchedule);
 
 		List<DeliveryAssignment> DeliveryAssignmentList = solvedSchedule.getDeliveryAssignmentList();
@@ -95,7 +95,7 @@ public class SolverTest {
 		unsolvedSchedule.getSkillList().addAll(MockUtils.createSkillList());
 
 		DeliverySchedule solvedSchedule = SolverUtils.assignAircrewToDelivery(unsolvedSchedule,
-				"deliveryScheduleSolver.xml");
+				"pocs/optaplanner/delivery/deliveryScheduleSolver.xml");
 		Assert.assertNotNull(solvedSchedule);
 
 		List<DeliveryAssignment> DeliveryAssignmentList = solvedSchedule.getDeliveryAssignmentList();
