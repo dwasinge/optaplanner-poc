@@ -1,5 +1,1 @@
-<kmodule xmlns="http://www.drools.org/xsd/kmodule">
-  <kbase name="deliveryScheduler" packages="pocs.optaplanner.delivery">
-    <ksession name="deliverySchedulerKsession"/>
-  </kbase>
-</kmodule>
+<kmodule xmlns="http://www.drools.org/xsd/kmodule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>

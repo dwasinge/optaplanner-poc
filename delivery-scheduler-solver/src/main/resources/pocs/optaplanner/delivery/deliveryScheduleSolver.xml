@@ -1,17 +1,9 @@
 <solver>
 
-	<!-- Define the model -->
-	<solutionClass>pocs.optaplanner.delivery.domain.DeliverySchedule</solutionClass>
-	<entityClass>pocs.optaplanner.delivery.domain.DeliveryAssignment</entityClass>
-
-	<!-- <scanAnnotatedClasses /> -->
-
-	<scoreDirectorFactory>
-		<scoreDrl>pocs/optaplanner/delivery/deliverySchedule.drl</scoreDrl>
-	</scoreDirectorFactory>
-
+	<scanAnnotatedClasses/>
+	<scoreDirectorFactory/>
 	<termination>
-		<secondsSpentLimit>5</secondsSpentLimit>
+		<secondsSpentLimit>10</secondsSpentLimit>
 	</termination>
 
 </solver>
