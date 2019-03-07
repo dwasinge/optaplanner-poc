@@ -3,7 +3,7 @@
 	<scanAnnotatedClasses/>
 	<scoreDirectorFactory/>
 	<termination>
-		<secondsSpentLimit>10</secondsSpentLimit>
+		<secondsSpentLimit>55</secondsSpentLimit>
 	</termination>
 
 </solver>
