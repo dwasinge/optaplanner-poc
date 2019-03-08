@@ -1,11 +1,15 @@
 package pocs.optaplanner.delivery.domain.skills;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 
 @Data
-public class Skill {
+public class Skill implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private Integer id;
 

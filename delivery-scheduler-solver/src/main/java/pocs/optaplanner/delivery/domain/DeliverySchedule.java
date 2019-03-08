@@ -1,9 +1,9 @@
 package pocs.optaplanner.delivery.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.optaplanner.core.api.domain.autodiscover.AutoDiscoverMemberType;
 import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
 import org.optaplanner.core.api.domain.solution.PlanningScore;
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
@@ -11,20 +11,16 @@ import org.optaplanner.core.api.domain.solution.drools.ProblemFactCollectionProp
 import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScore;
 
-import org.optaplanner.persistence.xstream.api.score.buildin.hardmediumsoft.HardMediumSoftScoreXStreamConverter;
-
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamConverter;
-
 import lombok.Data;
 import pocs.optaplanner.delivery.domain.aircrew.Aircrew;
 import pocs.optaplanner.delivery.domain.aircrew.AircrewAvailability;
 import pocs.optaplanner.delivery.domain.skills.Skill;
 
 @Data
-@XStreamAlias("DeliverySchedule")
-@PlanningSolution(autoDiscoverMemberType = AutoDiscoverMemberType.FIELD)
-public class DeliverySchedule {
+@PlanningSolution
+public class DeliverySchedule implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@ProblemFactCollectionProperty
 	private List<Skill> skillList = new ArrayList<>();
@@ -43,7 +39,6 @@ public class DeliverySchedule {
 	private List<DeliveryAssignment> deliveryAssignmentList = new ArrayList<>();
 
 	@PlanningScore
-	@XStreamConverter(HardMediumSoftScoreXStreamConverter.class)
 	private HardMediumSoftScore score = null;
 
 }

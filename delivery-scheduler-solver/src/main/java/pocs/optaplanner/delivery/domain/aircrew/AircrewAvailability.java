@@ -1,5 +1,6 @@
 package pocs.optaplanner.delivery.domain.aircrew;
 
+import java.io.Serializable;
 import java.time.OffsetDateTime;
 
 import javax.validation.constraints.NotNull;
@@ -7,7 +8,9 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class AircrewAvailability {
+public class AircrewAvailability implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@NotNull
 	private Aircrew aircrew;

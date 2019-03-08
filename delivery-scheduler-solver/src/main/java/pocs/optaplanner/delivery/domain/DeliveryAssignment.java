@@ -1,5 +1,6 @@
 package pocs.optaplanner.delivery.domain;
 
+import java.io.Serializable;
 import java.time.OffsetDateTime;
 
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
@@ -10,7 +11,9 @@ import pocs.optaplanner.delivery.domain.aircrew.Aircrew;
 
 @Data
 @PlanningEntity
-public class DeliveryAssignment {
+public class DeliveryAssignment implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private String name;
 
