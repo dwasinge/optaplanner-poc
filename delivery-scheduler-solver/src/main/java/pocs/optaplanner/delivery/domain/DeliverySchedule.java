@@ -22,7 +22,7 @@ import pocs.optaplanner.delivery.domain.aircrew.AircrewAvailability;
 import pocs.optaplanner.delivery.domain.skills.Skill;
 
 @Data
-@PlanningSolution()
+@PlanningSolution(autoDiscoverMemberType = AutoDiscoverMemberType.FIELD)
 public class DeliverySchedule {
 
 	@ProblemFactCollectionProperty
