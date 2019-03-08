@@ -10,11 +10,11 @@ import org.optaplanner.core.api.domain.solution.PlanningSolution;
 import org.optaplanner.core.api.domain.solution.drools.ProblemFactCollectionProperty;
 import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScore;
-import org.optaplanner.persistence.jackson.api.score.buildin.hardmediumsoft.HardMediumSoftScoreJacksonJsonDeserializer;
-import org.optaplanner.persistence.jackson.api.score.buildin.hardmediumsoft.HardMediumSoftScoreJacksonJsonSerializer;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.optaplanner.persistence.xstream.api.score.buildin.hardmediumsoft.HardMediumSoftScoreXStreamConverter;
+
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamConverter;
 
 import lombok.Data;
 import pocs.optaplanner.delivery.domain.aircrew.Aircrew;
@@ -22,6 +22,7 @@ import pocs.optaplanner.delivery.domain.aircrew.AircrewAvailability;
 import pocs.optaplanner.delivery.domain.skills.Skill;
 
 @Data
+@XStreamAlias("DeliverySchedule")
 @PlanningSolution(autoDiscoverMemberType = AutoDiscoverMemberType.FIELD)
 public class DeliverySchedule {
 
@@ -42,8 +43,7 @@ public class DeliverySchedule {
 	private List<DeliveryAssignment> deliveryAssignmentList = new ArrayList<>();
 
 	@PlanningScore
-	@JsonSerialize(using = HardMediumSoftScoreJacksonJsonSerializer.class)
-	@JsonDeserialize(using = HardMediumSoftScoreJacksonJsonDeserializer.class)
+	@XStreamConverter(HardMediumSoftScoreXStreamConverter.class)
 	private HardMediumSoftScore score = null;
 
 }

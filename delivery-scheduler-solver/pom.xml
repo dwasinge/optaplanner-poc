@@ -32,7 +32,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.optaplanner</groupId>
-			<artifactId>optaplanner-persistence-jackson</artifactId>
+			<artifactId>optaplanner-persistence-xstream</artifactId>
 			<version>${optaplanner.version}</version>
 			<scope>provided</scope>
 		</dependency>
