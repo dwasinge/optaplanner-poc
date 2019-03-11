@@ -46,12 +46,12 @@ rule "Aircrew Unavailable for Delivery Assignment"
 		AircrewAvailability(
 			state == AircrewAvailabilityState.UNAVAILABLE,
 			$a : aircrew,
-			$startTime : startTime,
-			$endTime : endTime
+			$availabilityStartTime : availabilityStartTime,
+			$availabilityEndTime : availabilityEndTime
 		)
 		DeliveryAssignment(
 			aircrew == $a,
-			DateTimeUtils.doTimeslotsIntersect($startTime,$endTime,
+			DateTimeUtils.doTimeslotsIntersect($availabilityStartTime,$availabilityEndTime,
 												startTime, endTime)
 		)
 	then

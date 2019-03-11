@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 import lombok.Data;
 import pocs.optaplanner.delivery.domain.skills.Skill;
 
@@ -16,10 +13,7 @@ public class Aircrew implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-
-	@NotBlank
 	private String name;
-	@NotNull
 	private Set<Skill> skillProficiencySet;
 
 	public Aircrew() {

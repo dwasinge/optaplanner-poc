@@ -1,5 +1,7 @@
 package pocs.optaplanner.delivery.domain.aircrew;
 
-public enum AircrewAvailabilityState {
+import java.io.Serializable;
+
+public enum AircrewAvailabilityState implements Serializable{
 	UNAVAILABLE, UNDESIRED, DESIRED
 }

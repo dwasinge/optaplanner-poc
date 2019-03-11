@@ -23,7 +23,7 @@ public class SolverTest {
 	public void setup() {
 		System.out.println("Starting test...");
 	}
-
+	
 	@Test
 	public void testSolveOneMissionAllCrewAvailable() {
 

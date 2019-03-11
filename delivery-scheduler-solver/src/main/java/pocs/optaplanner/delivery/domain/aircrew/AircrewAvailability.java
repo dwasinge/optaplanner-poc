@@ -3,7 +3,7 @@ package pocs.optaplanner.delivery.domain.aircrew;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
 
-import javax.validation.constraints.NotNull;
+import com.thoughtworks.xstream.annotations.XStreamConverter;
 
 import lombok.Data;
 
@@ -12,25 +12,22 @@ public class AircrewAvailability implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@NotNull
 	private Aircrew aircrew;
+	@XStreamConverter(org.kie.soup.commons.xstream.OffsetDateTimeXStreamConverter.class)
+	private OffsetDateTime availabilityStartTime;
+	@XStreamConverter(org.kie.soup.commons.xstream.OffsetDateTimeXStreamConverter.class)
+	private OffsetDateTime availabilityEndTime;
 
-	@NotNull
-	private OffsetDateTime startTime;
-	@NotNull
-	private OffsetDateTime endTime;
-
-	@NotNull
 	private AircrewAvailabilityState state;
 
 	public AircrewAvailability() {
 	}
 
-	public AircrewAvailability(Aircrew aircrew, OffsetDateTime startTime, OffsetDateTime endTime,
+	public AircrewAvailability(Aircrew aircrew, OffsetDateTime availabilityStartTime, OffsetDateTime availabilityEndTime,
 			AircrewAvailabilityState state) {
 		this.aircrew = aircrew;
-		this.startTime = startTime;
-		this.endTime = endTime;
+		this.availabilityStartTime = availabilityStartTime;
+		this.availabilityEndTime = availabilityEndTime;
 		this.state = state;
 	}
 
