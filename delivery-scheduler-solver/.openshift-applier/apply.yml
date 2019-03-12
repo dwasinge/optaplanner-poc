@@ -1,0 +1,10 @@
+---
+- name: Deploy Spring Boot Application
+  hosts: app
+  vars:
+    ci_cd_namespace: puckboard-dw-ci-cd
+    dev_namespace: puckboard-dw-dev
+    test_namespace: puckboard-dw-test
+  tasks:
+    - include_role:
+        name: openshift-applier/roles/openshift-applier

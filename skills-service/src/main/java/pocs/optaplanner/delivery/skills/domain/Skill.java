@@ -2,11 +2,13 @@ package pocs.optaplanner.delivery.skills.domain;
 
 import javax.validation.constraints.NotBlank;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
 public class Skill {
 
+	@ApiModelProperty(hidden = true)
 	private Integer id;
 
 	@NotBlank
