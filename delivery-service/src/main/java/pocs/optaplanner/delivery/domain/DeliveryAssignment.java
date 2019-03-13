@@ -6,11 +6,14 @@ import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import pocs.optaplanner.delivery.domain.aircrew.Aircrew;
+import pocs.optaplanner.delivery.domain.common.AbstractPersistable;
 
 @Data
 @PlanningEntity
-public class DeliveryAssignment {
+@EqualsAndHashCode(callSuper = true)
+public class DeliveryAssignment extends AbstractPersistable {
 
 	private String name;
 

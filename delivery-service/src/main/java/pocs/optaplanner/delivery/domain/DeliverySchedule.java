@@ -11,13 +11,16 @@ import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScore;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import pocs.optaplanner.delivery.domain.aircrew.Aircrew;
 import pocs.optaplanner.delivery.domain.aircrew.AircrewAvailability;
+import pocs.optaplanner.delivery.domain.common.AbstractPersistable;
 import pocs.optaplanner.delivery.domain.skills.Skill;
 
 @Data
 @PlanningSolution
-public class DeliverySchedule {
+@EqualsAndHashCode(callSuper = true)
+public class DeliverySchedule extends AbstractPersistable {
 
 	@ProblemFactCollectionProperty
 	private List<Skill> skillList = new ArrayList<>();
