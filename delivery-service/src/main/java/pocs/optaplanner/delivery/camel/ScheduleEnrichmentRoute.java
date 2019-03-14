@@ -37,7 +37,7 @@ public class ScheduleEnrichmentRoute extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 
-		getContext().setTracing(true);
+		//getContext().setTracing(true);
 
 		from(SCHEDULE_ENRICHMENT_ROUTE)
 			.routeId(SCHEDULE_ENRICHMENT_ROUTE_ID)
@@ -70,8 +70,7 @@ public class ScheduleEnrichmentRoute extends RouteBuilder {
 					
 					
 				}
-			})
-			.log("body from schedule enrichment route: \n${body}\n");
+			});
 
 		// get all skills from the configured service
 		from(SKILLS_ENRICHEMNT_ROUTE)
