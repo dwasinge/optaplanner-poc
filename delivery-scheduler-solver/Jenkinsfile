@@ -70,7 +70,7 @@ pipeline {
       steps {
 
         // run build
-        sh "mvn -B -e -X clean deploy -f ${POM_FILE} -DaltDeploymentRepository=${MVN_SNAPSHOT_DEPLOYMENT_REPOSITORY}"
+        sh "mvn -B clean package -f ${POM_FILE}
 
         // publish unit test report
         publishHTML(target: [
