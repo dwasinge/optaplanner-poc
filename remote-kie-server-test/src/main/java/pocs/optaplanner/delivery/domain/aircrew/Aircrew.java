@@ -1,32 +1,24 @@
 package pocs.optaplanner.delivery.domain.aircrew;
 
-import java.util.Collection;
 import java.util.Set;
 
 import lombok.Data;
-import pocs.optaplanner.delivery.domain.skills.Skill;
+import lombok.EqualsAndHashCode;
+import pocs.optaplanner.delivery.domain.common.AbstractPersistable;
 
 @Data
-public class Aircrew {
+@EqualsAndHashCode(callSuper = true)
+public class Aircrew extends AbstractPersistable {
 
-	private Integer id;
 	private String name;
-	private Set<Skill> skillProficiencySet;
+	private Set<Integer> skillProficiencyIdSet;
 
 	public Aircrew() {
 	}
 
-	public Aircrew(String name, Set<Skill> skillProficiencySet) {
+	public Aircrew(String name, Set<Integer> skillProficiencyIdSet) {
 		this.name = name;
-		this.skillProficiencySet = skillProficiencySet;
-	}
-
-	public boolean hasSkill(Skill skill) {
-		return skillProficiencySet.contains(skill);
-	}
-
-	public boolean hasSkills(Collection<Skill> skills) {
-		return skillProficiencySet.containsAll(skills);
+		this.skillProficiencyIdSet = skillProficiencyIdSet;
 	}
 
 }

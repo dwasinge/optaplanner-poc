@@ -31,18 +31,13 @@ import pocs.optaplanner.delivery.test.utils.MockUtils;
 
 public class RemoteKieServerTest {
 
-	// OpenshiftConfiguration
-	private static String KIE_HTTP_URL = "http://delivery-scheduler-app-kieserver-puckboard-dw-dev.apps.s11.core.rht-labs.com/services/rest/server";
-	private static String USER = "executionUser";
-	private static String PASSWORD = "eLEkMx6!";
-
 	// Local Configuration
-//	private static String KIE_HTTP_URL = "http://localhost:8080/kie-server/services/rest/server";
-//	private static String USER = "executionUser";
-//	private static String PASSWORD = "RedHat";
+	private static String KIE_HTTP_URL = "http://localhost:8080/kie-server/services/rest/server";
+	private static String USER = "executionUser";
+	private static String PASSWORD = "RedHat";
 
 	// container and solver configuration
-	private static String CONTAINER_ID = "defaultContainer";
+	private static String CONTAINER_ID = "myContainer";
 	private static String SOLVER_ID = "scheduleSolver";
 	private static String SOLVER_CONFIG_XML = "pocs/optaplanner/delivery/deliveryScheduleSolver.xml";
 
@@ -101,6 +96,8 @@ public class RemoteKieServerTest {
 		boolean robotFound = false;
 
 		for (DeliveryAssignment assignment : solved.getDeliveryAssignmentList()) {
+
+			System.out.println(assignment);
 
 			if ("pilot".equalsIgnoreCase(assignment.getDeliveryRole().getName())
 					&& "Taranga Leela".equalsIgnoreCase(assignment.getAircrew().getName())) {

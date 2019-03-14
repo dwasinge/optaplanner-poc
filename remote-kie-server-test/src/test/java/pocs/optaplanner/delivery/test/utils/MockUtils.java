@@ -29,17 +29,18 @@ public class MockUtils {
 		for (String role : requiredRoles) {
 
 			if (PILOT.equals(role)) {
-				missionAssignmentList.add(createMissionAssignment(name, description, startTime, endTime,
-						createDeliveryRole(PILOT, new HashSet<>(Arrays.asList(createSkill(PILOT))))));
+				missionAssignmentList.add(createMissionAssignment(0, startTime, endTime,
+						createDeliveryRole(PILOT, new HashSet<>(Arrays.asList(createSkill(PILOT).getId())))));
 			} else if (DELIVERY_BOY.equals(role)) {
-				missionAssignmentList.add(createMissionAssignment(name, description, startTime, endTime,
-						createDeliveryRole(DELIVERY_BOY, new HashSet<>(Arrays.asList(createSkill(DELIVERY_BOY))))));
+				missionAssignmentList.add(
+						createMissionAssignment(0, startTime, endTime, createDeliveryRole(DELIVERY_BOY,
+								new HashSet<>(Arrays.asList(createSkill(DELIVERY_BOY).getId())))));
 			} else if (NAVIGATOR.equals(role)) {
-				missionAssignmentList.add(createMissionAssignment(name, description, startTime, endTime,
-						createDeliveryRole(NAVIGATOR, new HashSet<>(Arrays.asList(createSkill(NAVIGATOR))))));
+				missionAssignmentList.add(createMissionAssignment(0, startTime, endTime,
+						createDeliveryRole(NAVIGATOR, new HashSet<>(Arrays.asList(createSkill(NAVIGATOR).getId())))));
 			} else if (ROBOT.equals(role)) {
-				missionAssignmentList.add(createMissionAssignment(name, description, startTime, endTime,
-						createDeliveryRole(ROBOT, new HashSet<>(Arrays.asList(createSkill(ROBOT))))));
+				missionAssignmentList.add(createMissionAssignment(0, startTime, endTime,
+						createDeliveryRole(ROBOT, new HashSet<>(Arrays.asList(createSkill(ROBOT).getId())))));
 			} else {
 				throw new IllegalArgumentException("unknown role '" + role + "'");
 			}
@@ -65,12 +66,12 @@ public class MockUtils {
 	public static List<Aircrew> createSquadronList() {
 
 		// create air crew list
-		Aircrew ac1 = createAircrew("Taranga Leela", new HashSet<>(Arrays.asList(createSkill(PILOT))));
+		Aircrew ac1 = createAircrew("Taranga Leela", new HashSet<>(Arrays.asList(createSkill(PILOT).getId())));
 		Aircrew ac2 = createAircrew("Philip J Fry",
-				new HashSet<>(Arrays.asList(createSkill(DELIVERY_BOY), createSkill(NAVIGATOR))));
+				new HashSet<>(Arrays.asList(createSkill(DELIVERY_BOY).getId(), createSkill(NAVIGATOR).getId())));
 		Aircrew ac3 = createAircrew("Bender B Rodriguez",
-				new HashSet<>(Arrays.asList(createSkill(ROBOT), createSkill(NAVIGATOR))));
-		Aircrew ac4 = createAircrew("Amy Wong", new HashSet<>(Arrays.asList(createSkill(NAVIGATOR))));
+				new HashSet<>(Arrays.asList(createSkill(ROBOT).getId(), createSkill(NAVIGATOR).getId())));
+		Aircrew ac4 = createAircrew("Amy Wong", new HashSet<>(Arrays.asList(createSkill(NAVIGATOR).getId())));
 
 		return Arrays.asList(ac1, ac2, ac3, ac4);
 
@@ -90,47 +91,47 @@ public class MockUtils {
 	public static Skill createSkill(String type) {
 
 		if (PILOT.equals(type)) {
-			return createSkill("p1000", "pilot", "all pilot training complete");
+			return createSkill(0, "p1000", "pilot", "all pilot training complete");
 		} else if (NAVIGATOR.equals(type)) {
-			return createSkill("n2000", "navigator", "can read a map");
+			return createSkill(1, "n2000", "navigator", "can read a map");
 		} else if (DELIVERY_BOY.equals(type)) {
-			return createSkill("hdb100", "human delivery boy", "human with no skills");
+			return createSkill(2, "hdb100", "human delivery boy", "human with no skills");
 		} else if (ROBOT.equals(type)) {
-			return createSkill("rdb100", "robot", "robot taking human job");
+			return createSkill(3, "rdb100", "robot", "robot taking human job");
 		} else {
 			throw new IllegalArgumentException("unknown type supplied.");
 		}
 
 	}
 
-	public static Skill createSkill(String code, String name, String description) {
-		return new Skill(code, name, description);
+	public static Skill createSkill(Integer id, String code, String name, String description) {
+		return new Skill(id, code, name, description);
 	}
 
 	public static List<DeliveryRole> createDeliveryRoleList() {
 
-		DeliveryRole pilotRole = createDeliveryRole(PILOT, new HashSet<>(Arrays.asList(createSkill(PILOT))));
-		DeliveryRole robotRole = createDeliveryRole(ROBOT, new HashSet<>(Arrays.asList(createSkill(ROBOT))));
+		DeliveryRole pilotRole = createDeliveryRole(PILOT, new HashSet<>(Arrays.asList(createSkill(PILOT).getId())));
+		DeliveryRole robotRole = createDeliveryRole(ROBOT, new HashSet<>(Arrays.asList(createSkill(ROBOT).getId())));
 		DeliveryRole navigatorRole = createDeliveryRole(NAVIGATOR,
-				new HashSet<>(Arrays.asList(createSkill(NAVIGATOR))));
+				new HashSet<>(Arrays.asList(createSkill(NAVIGATOR).getId())));
 		DeliveryRole deliveryBoyRole = createDeliveryRole(DELIVERY_BOY,
-				new HashSet<>(Arrays.asList(createSkill(DELIVERY_BOY))));
+				new HashSet<>(Arrays.asList(createSkill(DELIVERY_BOY).getId())));
 
 		return Arrays.asList(pilotRole, robotRole, navigatorRole, deliveryBoyRole);
 
 	}
 
-	public static DeliveryRole createDeliveryRole(String name, Set<Skill> requiredSkillSet) {
+	public static DeliveryRole createDeliveryRole(String name, Set<Integer> requiredSkillSet) {
 		return new DeliveryRole(name, requiredSkillSet);
 	}
 
-	public static Aircrew createAircrew(String name, Set<Skill> skillProficiencySet) {
+	public static Aircrew createAircrew(String name, Set<Integer> skillProficiencySet) {
 		return new Aircrew(name, skillProficiencySet);
 	}
 
-	public static DeliveryAssignment createMissionAssignment(String name, String description, OffsetDateTime startTime,
+	public static DeliveryAssignment createMissionAssignment(Integer scheduleId, OffsetDateTime startTime,
 			OffsetDateTime endTime, DeliveryRole missionRole) {
-		return new DeliveryAssignment(name, description, startTime, endTime, missionRole);
+		return new DeliveryAssignment(scheduleId, startTime, endTime, missionRole);
 	}
 
 	public static AircrewAvailability createAircrewAvailability(Aircrew aircrew, OffsetDateTime startTime,

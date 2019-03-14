@@ -1,6 +1,5 @@
 package pocs.optaplanner.delivery.domain;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,16 +10,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.optaplanner.core.api.score.buildin.hardmediumsoft.HardMediumSoftScore;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import pocs.optaplanner.delivery.domain.aircrew.Aircrew;
 import pocs.optaplanner.delivery.domain.aircrew.AircrewAvailability;
+import pocs.optaplanner.delivery.domain.common.AbstractPersistable;
 import pocs.optaplanner.delivery.domain.skills.Skill;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class DeliverySchedule implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class DeliverySchedule extends AbstractPersistable {
 
 	private List<Skill> skillList = new ArrayList<>();
 	private List<DeliveryRole> deliveryRoleList = new ArrayList<>();

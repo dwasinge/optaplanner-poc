@@ -5,17 +5,20 @@ import java.time.OffsetDateTime;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import pocs.optaplanner.delivery.domain.aircrew.Aircrew;
+import pocs.optaplanner.delivery.domain.common.AbstractPersistable;
 
 @Data
-public class DeliveryAssignment {
+@EqualsAndHashCode(callSuper = true)
+public class DeliveryAssignment extends AbstractPersistable {
 
-	private String name;
-	private String description;
+	private Integer scheduleId;
 	@XStreamConverter(org.kie.soup.commons.xstream.OffsetDateTimeXStreamConverter.class)
 	private OffsetDateTime startTime;
 	@XStreamConverter(org.kie.soup.commons.xstream.OffsetDateTimeXStreamConverter.class)
 	private OffsetDateTime endTime;
+
 	private Aircrew aircrew;
 
 	private DeliveryRole deliveryRole;
@@ -23,10 +26,9 @@ public class DeliveryAssignment {
 	public DeliveryAssignment() {
 	}
 
-	public DeliveryAssignment(String name, String description, OffsetDateTime startTime, OffsetDateTime endTime,
+	public DeliveryAssignment(Integer scheduleId, OffsetDateTime startTime, OffsetDateTime endTime,
 			DeliveryRole deliveryRole) {
-		this.name = name;
-		this.description = description;
+		this.scheduleId = scheduleId;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.deliveryRole = deliveryRole;

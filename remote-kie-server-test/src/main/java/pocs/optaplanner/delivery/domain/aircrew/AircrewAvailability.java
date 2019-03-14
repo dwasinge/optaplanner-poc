@@ -5,9 +5,12 @@ import java.time.OffsetDateTime;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import pocs.optaplanner.delivery.domain.common.AbstractPersistable;
 
 @Data
-public class AircrewAvailability {
+@EqualsAndHashCode(callSuper = true)
+public class AircrewAvailability extends AbstractPersistable {
 
 	private Aircrew aircrew;
 	@XStreamConverter(org.kie.soup.commons.xstream.OffsetDateTimeXStreamConverter.class)
