@@ -4,22 +4,23 @@ import java.io.Serializable;
 import java.util.Set;
 
 import lombok.Data;
-import pocs.optaplanner.delivery.domain.skills.Skill;
 
 @Data
 public class DeliveryRole implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private Integer id;
+
 	private String name;
-	private Set<Skill> requiredSkillSet;
+	private Set<Integer> requiredSkillCodeSet;
 
 	public DeliveryRole() {
 	}
 
-	public DeliveryRole(String name, Set<Skill> requiredSkillSet) {
+	public DeliveryRole(String name, Set<Integer> requiredSkillCodeSet) {
 		this.name = name;
-		this.requiredSkillSet = requiredSkillSet;
+		this.requiredSkillCodeSet = requiredSkillCodeSet;
 	}
 
 }

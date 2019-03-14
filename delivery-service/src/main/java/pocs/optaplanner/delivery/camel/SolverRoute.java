@@ -17,8 +17,9 @@ public class SolverRoute extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 
-		from(SOLVER_ROUTE_ENDPOINT).routeId("schedule-solver-route").log(LoggingLevel.INFO,
-				"The schedule solver route has been started.");
+		from(SOLVER_ROUTE_ENDPOINT)
+			.routeId("schedule-solver-route")
+			.log("Starting solver with ${body}");
 
 		from(GET_BEST_SOLUTION_ENDPOINT).routeId("best-solution-route")
 				.log(LoggingLevel.INFO, "The get best solution route has been started.").process(new Processor() {

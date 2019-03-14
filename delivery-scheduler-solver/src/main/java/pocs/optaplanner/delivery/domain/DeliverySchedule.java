@@ -31,6 +31,8 @@ public class DeliverySchedule implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private Integer id;
+
 	@ProblemFactCollectionProperty
 	private List<Skill> skillList = new ArrayList<>();
 

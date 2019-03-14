@@ -17,6 +17,13 @@ public class Skill implements Serializable {
 	public Skill() {
 	}
 
+	public Skill(Integer id, String code, String name, String description) {
+		this.id = id;
+		this.code = code;
+		this.name = name;
+		this.description = description;
+	}
+
 	public Skill(String code, String name, String description) {
 		this.code = code;
 		this.name = name;

@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import pocs.optaplanner.delivery.aircrew.domain.Aircrew;
-import pocs.optaplanner.delivery.aircrew.domain.skills.Skill;
 
 public class MapRepositoryTest {
 
@@ -26,7 +25,7 @@ public class MapRepositoryTest {
 		// given
 		Aircrew ac = new Aircrew();
 		ac.setName("joe");
-		ac.setSkillProficiencySet(new HashSet<>(Arrays.asList(new Skill("001", "pilot", "pilot"))));
+		ac.setSkillProficiencyIdSet(new HashSet<>(Arrays.asList(Integer.valueOf(0))));
 
 		// when
 		Optional<Aircrew> optional = repository.create(ac);
@@ -46,7 +45,7 @@ public class MapRepositoryTest {
 		Aircrew ac = new Aircrew();
 		ac.setId(11);
 		ac.setName("joe");
-		ac.setSkillProficiencySet(new HashSet<>(Arrays.asList(new Skill("001", "pilot", "pilot"))));
+		ac.setSkillProficiencyIdSet(new HashSet<>(Arrays.asList(Integer.valueOf(0))));
 
 		// when
 		Optional<Aircrew> optional = repository.create(ac);
@@ -63,7 +62,7 @@ public class MapRepositoryTest {
 		// given
 		Aircrew ac = new Aircrew();
 		ac.setName("joe");
-		ac.setSkillProficiencySet(new HashSet<>(Arrays.asList(new Skill("001", "pilot", "pilot"))));
+		ac.setSkillProficiencyIdSet(new HashSet<>(Arrays.asList(Integer.valueOf(0))));
 		Optional<Aircrew> saved = repository.create(ac);
 
 		// when

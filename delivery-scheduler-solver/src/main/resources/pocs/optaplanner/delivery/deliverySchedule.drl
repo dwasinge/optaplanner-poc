@@ -20,7 +20,7 @@ rule "Required Skill for a Delivery Assignment"
     when
         DeliveryAssignment(
                 aircrew != null,
-                !getAircrew().hasSkills(getDeliveryRole().getRequiredSkillSet()))
+                !getAircrew().hasSkills(getDeliveryRole().getRequiredSkillCodeSet()))
     then
         scoreHolder.addHardConstraintMatch(kcontext, -100);
 end
@@ -28,12 +28,12 @@ end
 rule "Aircrew cannot Act as Multiple Roles For Same Delivery"
 	when
 		DeliveryAssignment(
-			$n : name,
+			$sId : scheduleId,
 			$dr : deliveryRole,
 			$a : aircrew != null
 		)
 		DeliveryAssignment(
-			name == $n,
+			scheduleId == $sId,
 			deliveryRole != $dr,
 			aircrew == $a
 		)

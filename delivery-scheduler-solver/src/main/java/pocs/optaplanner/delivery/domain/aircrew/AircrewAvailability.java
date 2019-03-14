@@ -12,6 +12,8 @@ public class AircrewAvailability implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private Integer id;
+
 	private Aircrew aircrew;
 	@XStreamConverter(org.kie.soup.commons.xstream.OffsetDateTimeXStreamConverter.class)
 	private OffsetDateTime availabilityStartTime;

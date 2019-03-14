@@ -3,11 +3,12 @@ package pocs.optaplanner.delivery.domain.skills;
 import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import pocs.optaplanner.delivery.domain.common.AbstractPersistable;
 
 @Data
-public class Skill {
-
-	private Integer id;
+@EqualsAndHashCode(callSuper = true)
+public class Skill extends AbstractPersistable {
 
 	@NotBlank
 	private String code;

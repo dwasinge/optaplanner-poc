@@ -1,6 +1,5 @@
 package pocs.optaplanner.delivery.service;
 
-import java.util.Collection;
 import java.util.Optional;
 
 import org.apache.camel.ExchangePattern;
@@ -8,93 +7,24 @@ import org.apache.camel.ProducerTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import pocs.optaplanner.delivery.camel.SolverRoute;
+import pocs.optaplanner.delivery.camel.ScheduleEnrichmentRoute;
 import pocs.optaplanner.delivery.domain.DeliverySchedule;
 import pocs.optaplanner.delivery.exception.RepositoryException;
-import pocs.optaplanner.delivery.exception.ResourceAlreadyExistsException;
 import pocs.optaplanner.delivery.exception.ResourceNotFoundException;
-import pocs.optaplanner.delivery.repository.DeliveryScheduleMapRepository;
+import pocs.optaplanner.delivery.repository.AbstractMapRepository;
 
 @Component
-public class DeliveryScheduleService {
+public class DeliveryScheduleService extends AbstractGenericCrudService<DeliverySchedule> {
 
-	private DeliveryScheduleMapRepository repository;
 	private ProducerTemplate template;
+	private KieServerService kieServerService;
 
 	@Autowired
-	public DeliveryScheduleService(DeliveryScheduleMapRepository repository, ProducerTemplate template) {
-		this.repository = repository;
+	public DeliveryScheduleService(AbstractMapRepository<DeliverySchedule> repository, ProducerTemplate template,
+			KieServerService kieServerService) {
+		super(repository);
 		this.template = template;
-	}
-
-	public DeliverySchedule create(DeliverySchedule deliverySchedule) {
-
-		Optional<DeliverySchedule> optional = repository.get(deliverySchedule.getId());
-
-		if (optional.isPresent()) {
-			throw new ResourceAlreadyExistsException(
-					"resource already exists with id '" + deliverySchedule.getId() + "'");
-		}
-
-		optional = repository.create(deliverySchedule);
-
-		if (!optional.isPresent()) {
-			throw new RepositoryException("failed to create resource for " + deliverySchedule);
-		}
-
-		return optional.get();
-
-	}
-
-	public DeliverySchedule update(DeliverySchedule deliverySchedule) {
-
-		Optional<DeliverySchedule> optional = repository.get(deliverySchedule.getId());
-
-		if (!optional.isPresent()) {
-			throw new ResourceNotFoundException(
-					"no resource found to update with id '" + deliverySchedule.getId() + "'");
-		}
-
-		optional = repository.update(deliverySchedule);
-
-		if (!optional.isPresent()) {
-			throw new RepositoryException("failed to update resource " + deliverySchedule);
-		}
-
-		return optional.get();
-
-	}
-
-	public DeliverySchedule get(Integer id) {
-
-		Optional<DeliverySchedule> optional = repository.get(id);
-
-		if (!optional.isPresent()) {
-			throw new ResourceNotFoundException("no resource with id '" + id + "'");
-		}
-
-		return optional.get();
-
-	}
-
-	public Collection<DeliverySchedule> getAll() {
-		return repository.getAll();
-	}
-
-	public DeliverySchedule delete(Integer id) {
-
-		Optional<DeliverySchedule> optional = repository.delete(id);
-
-		if (!optional.isPresent()) {
-			throw new ResourceNotFoundException("no resource with id '" + id + "'");
-		}
-
-		return optional.get();
-
-	}
-
-	public Collection<DeliverySchedule> deleteAll() {
-		return repository.deleteAll();
+		this.kieServerService = kieServerService;
 	}
 
 	public void solve(Integer id) {
@@ -106,21 +36,26 @@ public class DeliveryScheduleService {
 			throw new ResourceNotFoundException("no resource with id '" + id + "'");
 		}
 
+		// try to enrich schedule before solving
+		DeliverySchedule enrichedSchedule = (DeliverySchedule) template
+				.sendBody(ScheduleEnrichmentRoute.SCHEDULE_ENRICHMENT_ROUTE, ExchangePattern.InOut, optional.get());
+
 		// start the solver route
-		template.sendBody(SolverRoute.SOLVER_ROUTE_ENDPOINT, optional.get());
+		kieServerService.solve(enrichedSchedule);
 
 	}
 
 	public DeliverySchedule getBestSolution(Integer id) {
 
-		// start the get best solution route
-		DeliverySchedule solvedSchedule = (DeliverySchedule) template.sendBody(SolverRoute.GET_BEST_SOLUTION_ENDPOINT,
-				ExchangePattern.InOut, id);
+		Optional<DeliverySchedule> optional = kieServerService.getBestSolution(id);
+		if (!optional.isPresent()) {
+			throw new ResourceNotFoundException("failed to find a best solution for schedule with id '" + id + "'");
+		}
 
 		// update schedule with best solution
-		Optional<DeliverySchedule> optional = repository.update(solvedSchedule);
+		optional = repository.update(optional.get());
 		if (!optional.isPresent()) {
-			throw new RepositoryException("failed to update resource. " + solvedSchedule);
+			throw new RepositoryException("failed to update resource. " + optional.get());
 		}
 
 		return optional.get();

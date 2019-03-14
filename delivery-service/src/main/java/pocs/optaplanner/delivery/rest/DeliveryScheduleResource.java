@@ -17,7 +17,7 @@ import pocs.optaplanner.delivery.domain.DeliverySchedule;
 import pocs.optaplanner.delivery.service.DeliveryScheduleService;
 
 @RestController
-@RequestMapping("/v1/api")
+@RequestMapping("/api/v1")
 public class DeliveryScheduleResource {
 
 	private DeliveryScheduleService service;
@@ -29,8 +29,8 @@ public class DeliveryScheduleResource {
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping(path = "/delivery/schedule", method = RequestMethod.POST)
-	public DeliverySchedule post(@Valid @RequestBody DeliverySchedule deliverySchedule) {
-		return service.create(deliverySchedule);
+	public DeliverySchedule post() {
+		return service.create(new DeliverySchedule());
 	}
 
 	@RequestMapping(path = "/delivery/schedule", method = RequestMethod.PUT)

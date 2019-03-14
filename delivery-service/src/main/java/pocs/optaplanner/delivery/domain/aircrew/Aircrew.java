@@ -3,37 +3,30 @@ package pocs.optaplanner.delivery.domain.aircrew;
 import java.util.Collection;
 import java.util.Set;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
-import pocs.optaplanner.delivery.domain.skills.Skill;
-
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import pocs.optaplanner.delivery.domain.common.AbstractPersistable;
 
 @Data
-public class Aircrew {
+@EqualsAndHashCode(callSuper = true)
+public class Aircrew extends AbstractPersistable {
 
-	private Integer id;
-
-	@NotBlank
 	private String name;
-	@NotNull
-	private Set<Skill> skillProficiencySet;
+	private Set<Integer> skillProficiencyIdSet;
 
 	public Aircrew() {
 	}
 
-	public Aircrew(String name, Set<Skill> skillProficiencySet) {
+	public Aircrew(String name, Set<Integer> skillProficiencyIdSet) {
 		this.name = name;
-		this.skillProficiencySet = skillProficiencySet;
+		this.skillProficiencyIdSet = skillProficiencyIdSet;
 	}
 
-	public boolean hasSkill(Skill skill) {
-		return skillProficiencySet.contains(skill);
+	public boolean hasSkill(Integer skillId) {
+		return skillProficiencyIdSet.contains(skillId);
 	}
 
-	public boolean hasSkills(Collection<Skill> skills) {
-		return skillProficiencySet.containsAll(skills);
+	public boolean hasSkills(Collection<Integer> skillIds) {
+		return skillProficiencyIdSet.containsAll(skillIds);
 	}
-
 }

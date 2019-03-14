@@ -6,8 +6,6 @@ import java.time.OffsetDateTime;
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 
-import com.thoughtworks.xstream.annotations.XStreamConverter;
-
 import lombok.Data;
 import pocs.optaplanner.delivery.domain.aircrew.Aircrew;
 
@@ -17,13 +15,12 @@ public class DeliveryAssignment implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String name;
+	private Integer id;
 
-	private String description;
+	private Integer scheduleId;
 
-	@XStreamConverter(org.kie.soup.commons.xstream.OffsetDateTimeXStreamConverter.class)
 	private OffsetDateTime startTime;
-	@XStreamConverter(org.kie.soup.commons.xstream.OffsetDateTimeXStreamConverter.class)
+
 	private OffsetDateTime endTime;
 
 	@PlanningVariable(valueRangeProviderRefs = { "availableAircrewRange" }, nullable = true)
@@ -34,10 +31,9 @@ public class DeliveryAssignment implements Serializable {
 	public DeliveryAssignment() {
 	}
 
-	public DeliveryAssignment(String name, String description, OffsetDateTime startTime, OffsetDateTime endTime,
+	public DeliveryAssignment(Integer scheduleId, OffsetDateTime startTime, OffsetDateTime endTime,
 			DeliveryRole deliveryRole) {
-		this.name = name;
-		this.description = description;
+		this.scheduleId = scheduleId;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.deliveryRole = deliveryRole;

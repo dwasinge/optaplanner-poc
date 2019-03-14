@@ -1,4 +1,4 @@
-package pocs.optaplanner.delivery.domain.common;
+package pocs.optaplanner.delivery.aircrew.domain.common;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

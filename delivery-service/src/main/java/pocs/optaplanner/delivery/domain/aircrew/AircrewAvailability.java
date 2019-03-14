@@ -5,9 +5,12 @@ import java.time.OffsetDateTime;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import pocs.optaplanner.delivery.domain.common.AbstractPersistable;
 
 @Data
-public class AircrewAvailability {
+@EqualsAndHashCode(callSuper = true)
+public class AircrewAvailability extends AbstractPersistable {
 
 	@NotNull
 	private Aircrew aircrew;

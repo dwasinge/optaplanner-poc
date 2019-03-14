@@ -2,6 +2,8 @@ package pocs.optaplanner.delivery;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.Assert;
@@ -14,6 +16,7 @@ import pocs.optaplanner.delivery.domain.DeliverySchedule;
 import pocs.optaplanner.delivery.domain.aircrew.Aircrew;
 import pocs.optaplanner.delivery.domain.aircrew.AircrewAvailability;
 import pocs.optaplanner.delivery.domain.aircrew.AircrewAvailabilityState;
+import pocs.optaplanner.delivery.domain.skills.Skill;
 import pocs.optaplanner.delivery.utils.MockUtils;
 import pocs.optaplanner.delivery.utils.SolverUtils;
 
@@ -23,7 +26,32 @@ public class SolverTest {
 	public void setup() {
 		System.out.println("Starting test...");
 	}
-	
+
+	@Test
+	public void testThis() {
+
+		DeliverySchedule unsolved = new DeliverySchedule();
+
+		unsolved.getAirCrewList().add(new Aircrew("derek", new HashSet<>(Arrays.asList(0))));
+
+		DeliveryRole deliveryRole = new DeliveryRole("pilot", new HashSet<>(Arrays.asList(0)));
+		unsolved.getDeliveryRoleList().add(deliveryRole);
+
+		OffsetDateTime startTime = OffsetDateTime.of(2019, 3, 1, 10, 0, 0, 0, ZoneOffset.UTC);
+		OffsetDateTime endTime = OffsetDateTime.of(2019, 3, 1, 12, 0, 0, 0, ZoneOffset.UTC);
+		DeliveryAssignment assignment = new DeliveryAssignment(0, startTime, endTime, deliveryRole);
+		unsolved.getDeliveryAssignmentList().add(assignment);
+
+		Skill skill = new Skill(0, "001", "pilot", "can fly");
+		unsolved.getSkillList().add(skill);
+
+		DeliverySchedule solved = SolverUtils.assignAircrewToDelivery(unsolved,
+				"pocs/optaplanner/delivery/deliveryScheduleSolver.xml");
+		Assert.assertNotNull(solved);
+
+
+	}
+
 	@Test
 	public void testSolveOneMissionAllCrewAvailable() {
 
@@ -35,9 +63,8 @@ public class SolverTest {
 		// create mission assignment list with no aircrew assigned
 		OffsetDateTime startTime = OffsetDateTime.of(2019, 3, 1, 10, 0, 0, 0, ZoneOffset.UTC);
 		OffsetDateTime endTime = OffsetDateTime.of(2019, 3, 1, 12, 0, 0, 0, ZoneOffset.UTC);
-		unsolvedSchedule.getDeliveryAssignmentList()
-				.addAll(MockUtils.createDelivery("lugnuts", "deliver lugnuts to robot planet", startTime, endTime,
-						MockUtils.PILOT, MockUtils.NAVIGATOR, MockUtils.ROBOT));
+		unsolvedSchedule.getDeliveryAssignmentList().addAll(
+				MockUtils.createDelivery(0, startTime, endTime, MockUtils.PILOT, MockUtils.NAVIGATOR, MockUtils.ROBOT));
 
 		// create mission role list
 		unsolvedSchedule.getDeliveryRoleList().addAll(MockUtils.createDeliveryRoleList());
@@ -59,7 +86,7 @@ public class SolverTest {
 			Aircrew ac = assignment.getAircrew();
 
 			System.out.println(ac.getName() + " has been assigned role '" + dRole.getName() + "' for mission "
-					+ assignment.getName());
+					+ assignment.getScheduleId());
 
 		}
 
@@ -84,9 +111,8 @@ public class SolverTest {
 		// create mission assignment list with no aircrew assigned
 		OffsetDateTime startTime = OffsetDateTime.of(2019, 3, 1, 10, 0, 0, 0, ZoneOffset.UTC);
 		OffsetDateTime endTime = OffsetDateTime.of(2019, 3, 1, 12, 0, 0, 0, ZoneOffset.UTC);
-		unsolvedSchedule.getDeliveryAssignmentList()
-				.addAll(MockUtils.createDelivery("lugnuts", "deliver lugnuts to robot planet", startTime, endTime,
-						MockUtils.PILOT, MockUtils.NAVIGATOR, MockUtils.ROBOT));
+		unsolvedSchedule.getDeliveryAssignmentList().addAll(
+				MockUtils.createDelivery(0, startTime, endTime, MockUtils.PILOT, MockUtils.NAVIGATOR, MockUtils.ROBOT));
 
 		// create mission role list
 		unsolvedSchedule.getDeliveryRoleList().addAll(MockUtils.createDeliveryRoleList());
@@ -108,7 +134,7 @@ public class SolverTest {
 			Aircrew ac = assignment.getAircrew();
 
 			System.out.println(ac.getName() + " has been assigned role '" + dRole.getName() + "' for mission "
-					+ assignment.getName());
+					+ assignment.getScheduleId());
 
 		}
 
