@@ -1,5 +1,7 @@
 package pocs.optaplanner.delivery.camel;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.camel.Exchange;
@@ -51,18 +53,20 @@ public class ScheduleEnrichmentRoute extends RouteBuilder {
 				
 				@Override
 				public void process(Exchange exchange) throws Exception {
-					
-					List<Skill> skillList = exchange.getIn().getHeader("skillsList", List.class);
-					List<Aircrew> aircrewList = exchange.getIn().getHeader("aircrewList", List.class);
-					List<DeliveryRole> deliveryRoleList = exchange.getIn().getHeader("deliveryRoleList", List.class);
-					List<DeliveryAssignment> deliveryAssignmentList = exchange.getIn().getHeader("deliveryAssignmentList", List.class);
 
 					DeliverySchedule schedule = exchange.getIn().getHeader("schedule", DeliverySchedule.class);
 
-					schedule.setSkillList(skillList);
-					schedule.setAirCrewList(aircrewList);
-					schedule.setDeliveryRoleList(deliveryRoleList);
-					schedule.setDeliveryAssignmentList(deliveryAssignmentList);
+					Skill[] skillArray = exchange.getIn().getHeader("skillsList", Skill[].class);
+					schedule.getSkillList().addAll(Arrays.asList(skillArray));
+
+					Aircrew[] aircrewArray = exchange.getIn().getHeader("aircrewList", Aircrew[].class);
+					schedule.getAirCrewList().addAll(Arrays.asList(aircrewArray));
+
+					DeliveryRole[] deliveryRoleArray = exchange.getIn().getHeader("deliveryRoleList", DeliveryRole[].class);
+					schedule.getDeliveryRoleList().addAll(Arrays.asList(deliveryRoleArray));
+
+					DeliveryAssignment[] deliveryAssignmentArray = exchange.getIn().getHeader("deliveryAssignmentList", DeliveryAssignment[].class);
+					schedule.getDeliveryAssignmentList().addAll(Arrays.asList(deliveryAssignmentArray));
 
 					exchange.getIn().setBody(schedule);
 					
@@ -76,7 +80,7 @@ public class ScheduleEnrichmentRoute extends RouteBuilder {
 			.routeId(SKILLS_ENRICHMENT_ROUTE_ID)
 			.enrich("{{skills.service.endpoint}}")
 			.unmarshal()
-				.json(JsonLibrary.Jackson, List.class)
+				.json(JsonLibrary.Jackson, Skill[].class)
 			.setHeader("skillsList", simple("${body}"))
 			.setBody(simple("${null}"));
 
@@ -85,7 +89,7 @@ public class ScheduleEnrichmentRoute extends RouteBuilder {
 			.routeId(AIRCREW_ENRICHMENT_ROUTE_ID)
 			.enrich("{{aircrew.service.endpoint}}")
 			.unmarshal()
-				.json(JsonLibrary.Jackson, List.class)
+				.json(JsonLibrary.Jackson, Aircrew[].class)
 			.setHeader("aircrewList", simple("${body}"))
 			.setBody(simple("${null}"));
 

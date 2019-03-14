@@ -2,7 +2,7 @@ package pocs.optaplanner.delivery.domain.aircrew;
 
 import java.time.OffsetDateTime;
 
-import javax.validation.constraints.NotNull;
+import com.thoughtworks.xstream.annotations.XStreamConverter;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,15 +12,11 @@ import pocs.optaplanner.delivery.domain.common.AbstractPersistable;
 @EqualsAndHashCode(callSuper = true)
 public class AircrewAvailability extends AbstractPersistable {
 
-	@NotNull
 	private Aircrew aircrew;
-
-	@NotNull
+	@XStreamConverter(org.kie.soup.commons.xstream.OffsetDateTimeXStreamConverter.class)
 	private OffsetDateTime startTime;
-	@NotNull
+	@XStreamConverter(org.kie.soup.commons.xstream.OffsetDateTimeXStreamConverter.class)
 	private OffsetDateTime endTime;
-
-	@NotNull
 	private AircrewAvailabilityState state;
 
 	public AircrewAvailability() {

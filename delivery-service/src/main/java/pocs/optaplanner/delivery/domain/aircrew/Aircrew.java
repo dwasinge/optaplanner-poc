@@ -1,6 +1,5 @@
 package pocs.optaplanner.delivery.domain.aircrew;
 
-import java.util.Collection;
 import java.util.Set;
 
 import lombok.Data;
@@ -22,11 +21,4 @@ public class Aircrew extends AbstractPersistable {
 		this.skillProficiencyIdSet = skillProficiencyIdSet;
 	}
 
-	public boolean hasSkill(Integer skillId) {
-		return skillProficiencyIdSet.contains(skillId);
-	}
-
-	public boolean hasSkills(Collection<Integer> skillIds) {
-		return skillProficiencyIdSet.containsAll(skillIds);
-	}
 }

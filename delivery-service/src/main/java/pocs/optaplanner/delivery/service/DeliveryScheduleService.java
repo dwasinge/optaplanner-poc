@@ -7,6 +7,8 @@ import org.apache.camel.ProducerTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.thoughtworks.xstream.XStream;
+
 import pocs.optaplanner.delivery.camel.ScheduleEnrichmentRoute;
 import pocs.optaplanner.delivery.domain.DeliverySchedule;
 import pocs.optaplanner.delivery.exception.RepositoryException;
