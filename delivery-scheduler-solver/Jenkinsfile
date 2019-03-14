@@ -99,6 +99,11 @@ pipeline {
     // Build Container Image using the artifacts produced in previous stages
     stage('Build Container Image'){
       steps {
+
+        // TODO: REmove
+        sh "printenv"
+        sh "ls -la ${env.BUILD_OUTPUT_DIR}"
+
         binaryBuild(projectName: env.BUILD, buildConfigName: env.APP_NAME, artifactsDirectoryName: "${env.BUILD_OUTPUT_DIR}");
       }
     }
