@@ -4,7 +4,7 @@ openshift_cluster_content:
   content:
   - name: "create application build pipeline"
     template: "{{ inventory_dir }}/../templates/binary-template-with-secrets.yml"
-    params: "{{ inventory_dir }}/../params/build"
+    params_from_vars: "{{ build }}"
     namespace: "{{ ci_cd_namespace }}"
     tags:
       - build
@@ -12,14 +12,15 @@ openshift_cluster_content:
   content:
   - name: "deploy application to dev environment"
     template: "https://raw.githubusercontent.com/rht-labs/openshift-templates/v1.1/app-deploy/http-app-deploy-template.yml"
-    params: "{{ inventory_dir }}/../params/dev"
+    params_from_vars: "{{ dev }}"
     namespace: "{{ dev_namespace }}"
     tags:
-      - dev
+      - deployment
+      - dev-deployments
   - name: "deploy application to test environment"
     template: "https://raw.githubusercontent.com/rht-labs/openshift-templates/v1.1/app-deploy/http-app-deploy-template.yml"
-    params: "{{ inventory_dir }}/../params/test"
+    params_from_vars: "{{ test }}"
     namespace: "{{ test_namespace }}"
     tags:
-      - test
-
+      - deployment
+      - test-deployments

@@ -2,7 +2,7 @@ library identifier: "pipeline-library@master",
 retriever: modernSCM(
   [
     $class: "GitSCMSource",
-    remote: "https://github.com/dwasinge/pipeline-library.git"
+    remote: "https://github.com/redhat-cop/pipeline-library"
   ]
 )
 
@@ -14,7 +14,7 @@ openshift.withCluster() {
   env.DEV = env.BUILD.replace('ci-cd', 'dev')
   env.TEST = env.BUILD.replace('ci-cd', 'test')
 
-  env.MVN_SNAPSHOT_DEPLOYMENT_REPOSITORY = "nexus::default::http://nexus:8081/repository/maven-snapshots"
+  env.MVN_SNAPSHOT_DEPLOYMENT_REPOSITORY = "nexus::http://nexus:8081/repository/maven-snapshots"
 
   env.APP_NAME = "${env.JOB_NAME}".replaceAll(/-?${env.PROJECT_NAME}-?/, '').replaceAll(/-?pipeline-?/, '').replaceAll('/','')
   env.POM_FILE = env.PIPELINE_CONTEXT_DIR ? "${env.PIPELINE_CONTEXT_DIR}/pom.xml" : "pom.xml"
