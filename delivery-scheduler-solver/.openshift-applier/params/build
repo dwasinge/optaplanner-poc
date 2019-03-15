@@ -1,5 +1,0 @@
-NAME: delivery-scheduler-solver-service
-PIPELINE_SOURCE_REPOSITORY_URL: https://github.com/dwasinge/optaplanner-poc.git
-PIPELINE_SOURCE_REPOSITORY_REF= master
-PIPELINE_CONTEXT_DIR: delivery-scheduler-solver
-S2I_BASE_IMAGE: rhdm72-kieserver-openshift:1.1

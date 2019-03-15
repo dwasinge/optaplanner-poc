@@ -1,10 +1,38 @@
 ---
-- name: Deploy Spring Boot Application
-  hosts: app
+- name: Deploy KIE Services Application
+  hosts: seed-hosts
   vars:
+    app_name: delivery-scheduler-solver
     ci_cd_namespace: puckboard-dw-ci-cd
     dev_namespace: puckboard-dw-dev
     test_namespace: puckboard-dw-test
+    build:
+      NAME: "{{app_name}}-kieserver"
+      PIPELINE_SOURCE_REPOSITORY_URL: https://github.com/dwasinge/optaplanner-poc.git
+      PIPELINE_SOURCE_REPOSITORY_REF: master
+      PIPELINE_CONTEXT_DIR: "{{app_name}}"
+      S2I_BASE_IMAGE: rhdm72-kieserver-openshift:1.1
+    dev:
+      APPLICATION_NAME: "{{app_name}}"
+      KIE_SERVER_HTTPS_SECRET: kieserver-app-secret
+      KIE_SERVER_CONTAINER_DEPLOYMENT: defaultContainer=pocs.opataplanner.delivery:delivery-scheduler-solver:1.0.0-SNAPSHOT
+      PIPELINES_NAMESPACE: "{{ci_cd_namespace}}"
+      KIE_SERVER_HTTPS_KEYSTORE: server.keystore
+      KIE_SERVER_HTTPS_NAME: puckboard
+      KIE_SERVER_HTTPS_PASSWORD: puckboard
+      MAVEN_REPO_URL: https://nexus-puckboard-dw-ci-cd.apps.s11.core.rht-labs.com/repository/maven-public/
+    test:
+      APPLICATION_NAME: "{{app_name}}"
+      KIE_SERVER_HTTPS_SECRET: kieserver-app-secret
+      KIE_SERVER_CONTAINER_DEPLOYMENT: defaultContainer=pocs.opataplanner.delivery:delivery-scheduler-solver:1.0.0-SNAPSHOT
+      PIPELINES_NAMESPACE: "{{ci_cd_namespace}}"
+      KIE_SERVER_HTTPS_KEYSTORE: server.keystore
+      KIE_SERVER_HTTPS_NAME: puckboard
+      KIE_SERVER_HTTPS_PASSWORD: puckboard
+      MAVEN_REPO_URL: https://nexus-puckboard-dw-ci-cd.apps.s11.core.rht-labs.com/repository/maven-public/
   tasks:
     - include_role:
         name: openshift-applier/roles/openshift-applier
+
+
+

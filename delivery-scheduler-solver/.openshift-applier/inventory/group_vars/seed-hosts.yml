@@ -1,0 +1,38 @@
+---
+openshift_cluster_content:
+- object: builds
+  content:
+  - name: "create application build pipeline"
+    template: "{{ inventory_dir }}/../templates/binary-template-with-secrets.yml"
+    params_from_vars: "{{ build }}"
+    namespace: "{{ ci_cd_namespace }}"
+    tags:
+      - build
+- object: deployments
+  content:
+  - name: "application key store secret"
+    template: "{{ inventory_dir }}/../secrets/kieserver-app-secret"
+    namespace: "{{ dev_namespace }}"
+    tags:
+      - secrets
+      - dev-secrets
+  - name: "deploy application to dev environment"
+    template: "{{ inventory_dir }}/../templates/kie-server-deployment.yml"
+    params_from_vars: "{{ dev }}"
+    namespace: "{{ dev_namespace }}"
+    tags:
+      - deployment
+      - dev-deployments
+  - name: "application key store secret"
+    template: "{{ inventory_dir }}/../secrets/kieserver-app-secret"
+    namespace: "{{ test_namespace }}"
+    tags:
+      - secrets
+      - test-secrets
+  - name: "deploy application to test environment"
+    template: "{{ inventory_dir }}/../templates/kie-server-deployment.yml"
+    params_from_vars: "{{ test }}"
+    namespace: "{{ test_namespace }}"
+    tags:
+      - deployment
+      - test-deployments
