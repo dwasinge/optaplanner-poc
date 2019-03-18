@@ -8,17 +8,31 @@ openshift_cluster_content:
     namespace: "{{ ci_cd_namespace }}"
     tags:
       - build
+- object: secrets
+  content:
+  - name: "application key store secret"
+    file: "{{ inventory_dir }}/../secrets/kie-server-secret.yml"
+    namespace: "{{ dev_namespace }}"
+    tags:
+      - secret
+      - dev-secrets
+  - name: "application key store secret"
+    file: "{{ inventory_dir }}/../secrets/kie-server-secret.yml"
+    namespace: "{{ test_namespace }}"
+    tags:
+      - secret
+      - test-secrets
 - object: deployments
   content:
   - name: "deploy application to dev environment"
-    template: "https://raw.githubusercontent.com/rht-labs/openshift-templates/v1.1/app-deploy/http-app-deploy-template.yml"
+    template: "{{ inventory_dir }}/../templates/http-app-deploy-template.yml"
     params_from_vars: "{{ dev }}"
     namespace: "{{ dev_namespace }}"
     tags:
       - deployment
       - dev-deployments
   - name: "deploy application to test environment"
-    template: "https://raw.githubusercontent.com/rht-labs/openshift-templates/v1.1/app-deploy/http-app-deploy-template.yml"
+    template: "{{ inventory_dir }}/../templates/http-app-deploy-template.yml"
     params_from_vars: "{{ test }}"
     namespace: "{{ test_namespace }}"
     tags:

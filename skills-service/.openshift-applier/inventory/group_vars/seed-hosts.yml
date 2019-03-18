@@ -11,14 +11,14 @@ openshift_cluster_content:
 - object: deployments
   content:
   - name: "deploy application to dev environment"
-    template: "https://raw.githubusercontent.com/rht-labs/openshift-templates/v1.1/app-deploy/http-app-deploy-template.yml"
+    template: "{{ inventory_dir }}/../http-app-deploy-template"
     params_from_vars: "{{ dev }}"
     namespace: "{{ dev_namespace }}"
     tags:
       - deployment
       - dev-deployments
   - name: "deploy application to test environment"
-    template: "https://raw.githubusercontent.com/rht-labs/openshift-templates/v1.1/app-deploy/http-app-deploy-template.yml"
+    template: "{{ inventory_dir }}/../http-app-deploy-template"
     params_from_vars: "{{ test }}"
     namespace: "{{ test_namespace }}"
     tags:
