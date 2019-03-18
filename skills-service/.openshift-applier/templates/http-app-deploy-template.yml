@@ -43,13 +43,13 @@ objects:
       spec:
         containers:
         - env:
-            - name: SERVER_PORT
-              value: "${SERVER_PORT}"
-            - name: MANAGEMENT_CONTEXT-PATH
-              value: "${MANAGEMENT_CONTEXT-PATH}"
-            - name: MANAGEMENT_SERVER_PORT
-              value: ${MANAGEMENT_SERVER_PORT}
-        - image: "${NAME}"
+          - name: SERVER_PORT
+            value: ${SERVER_PORT}
+          - name: MANAGEMENT_CONTEXT-PATH
+            value: "${MANAGEMENT_CONTEXT}"
+          - name: MANAGEMENT_SERVER_PORT
+            value: ${MANAGEMENT_SERVER_PORT}
+          image: "${NAME}"
           imagePullPolicy: Always
           name: "${NAME}"
           ports:
@@ -137,9 +137,9 @@ parameters:
   required: true
 - name: SERVER_PORT
   displayName: Application Server Port
-  description: Port for application endpoints
+  description: The port the application will liston on
   required: true
-  value: 8080
+  value: "8080"
 - name: MANAGEMENT_CONTEXT
   displayName: Spring context for liveness and health checks
   description: Spring context for liveness and health checks
@@ -149,4 +149,6 @@ parameters:
   displayName: Port listening liveness and health checks
   description: Port for liveness and health checks
   required: true
-  value: 8081
+  value: "8081"
+labels:
+  template: http-app-deploy-template
