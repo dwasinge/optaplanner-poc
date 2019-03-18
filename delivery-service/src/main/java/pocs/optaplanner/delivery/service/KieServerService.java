@@ -15,7 +15,7 @@ import pocs.optaplanner.delivery.domain.DeliverySchedule;
 @Component
 public class KieServerService {
 
-	private static String CONTAINER_ID = "myContainer";
+	private static String CONTAINER_ID = "schedulerContainer";
 	private static String SOLVER_ID = "scheduleSolver-{id}";
 	private static String SOLVER_CONFIG_XML = "pocs/optaplanner/delivery/deliveryScheduleSolver.xml";
 

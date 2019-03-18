@@ -15,7 +15,7 @@
     dev:
       APPLICATION_NAME: "{{app_name}}"
       KIE_SERVER_HTTPS_SECRET: kieserver-app-secret
-      KIE_SERVER_CONTAINER_DEPLOYMENT: defaultContainer=pocs.optaplanner.delivery:delivery-scheduler-solver:1.0.0-SNAPSHOT
+      KIE_SERVER_CONTAINER_DEPLOYMENT: schedulerContainer=pocs.optaplanner.delivery:delivery-scheduler-solver:1.0.0-SNAPSHOT
       PIPELINES_NAMESPACE: "{{ci_cd_namespace}}"
       KIE_SERVER_HTTPS_KEYSTORE: server.keystore
       KIE_SERVER_HTTPS_NAME: puckboard
@@ -24,7 +24,7 @@
     test:
       APPLICATION_NAME: "{{app_name}}"
       KIE_SERVER_HTTPS_SECRET: kieserver-app-secret
-      KIE_SERVER_CONTAINER_DEPLOYMENT: defaultContainer=pocs.optaplanner.delivery:delivery-scheduler-solver:1.0.0-SNAPSHOT
+      KIE_SERVER_CONTAINER_DEPLOYMENT: schedulerContainer=pocs.optaplanner.delivery:delivery-scheduler-solver:1.0.0-SNAPSHOT
       PIPELINES_NAMESPACE: "{{ci_cd_namespace}}"
       KIE_SERVER_HTTPS_KEYSTORE: server.keystore
       KIE_SERVER_HTTPS_NAME: puckboard
