@@ -16,11 +16,15 @@ This application has been tested using the tag: v3.11.4
 Below are the installation instructions.  Please see the corresponding READMEs in the projects for usage.
 
 
-## Create Openshift Namespaces Required for Build and Deployment
+## Prerequisites
+
+### Create Openshift Namespaces Required for Build and Deployment
 
 1. Clone the labs-ci-cd repository from above and switch to the tag.
 
 `git clone git@github.com:rht-labs/labs-ci-cd.git`
+
+`cd labs-ci-cd`
 
 `git checkout -b v3.11.4`
 
@@ -40,7 +44,17 @@ Below are the installation instructions.  Please see the corresponding READMEs i
 
 `ansible-playbook site.yml -e ci_cd_namespace=optaplanner-scheduler-ci-cd -e dev_namespace=optaplanner-scheduler-dev -e test_namespace=optaplanner-scheduler-test -l tools`
 
-## Deploy the KIE Server Project
+NOTE:  Make sure all pods in the optaplanner-scheduler-ci-cd namespace have come up before proceeding.  In particular, SonarQube, Jenkins, and Nexus.
+
+## Optaplanner POC Installation
+
+Clone this project:
+
+`git clone git@github.com:dwasinge/optaplanner-poc.git`
+
+`cd optaplanner-poc`
+
+### Deploy the KIE Server Project
 
 1. Change directories to the .openshift-applier folder under delivery-scheduler-solver
 
@@ -52,11 +66,11 @@ Below are the installation instructions.  Please see the corresponding READMEs i
 
 3. Install all service objects into the OpenShift cluster
 
-`ansible-playbook apply -i inventory/`
+`ansible-playbook apply.yml -i inventory/`
 
 This will created the required pipeline to build the application as well as the deployment configurations for the dev and test environments.  The first pipeline should start which will check out the source code, build/package the artifact, and create the container image.  Once the image has been created, it will be deployed to the dev namespace.  There is a manual promotion to the test environment so you will have to click proceed through the pipeline in OpenShift or through Jenkins.
 
-## Delpoy the Skills Service
+### Delpoy the Skills Service
 
 1. Change directories to the .openshift-applier folder under delivery-scheduler-solver
 
@@ -68,13 +82,13 @@ This will created the required pipeline to build the application as well as the 
 
 3. Install all service objects into the OpenShift cluster
 
-`ansible-playbook apply -i inventory/`
+`ansible-playbook apply.yml -i inventory/`
 
 This will created the required pipeline to build the application as well as the deployment configurations for the dev and test environments.  The first pipeline should start which will check out the source code, build/package the artifact, and create the container image.  Once the image has been created, it will be deployed to the dev namespace.  There is a manual promotion to the test environment so you will have to click proceed through the pipeline in OpenShift or through Jenkins.
 
 4.  The Swagger API for the application can be found at the following path:  <hostname>/swagger-ui.html.
 
-## Deploy the Delivery Aircrew Service
+### Deploy the Delivery Aircrew Service
 
 1. Change directories to the .openshift-applier folder under delivery-scheduler-solver
 
@@ -86,13 +100,13 @@ This will created the required pipeline to build the application as well as the 
 
 3. Install all service objects into the OpenShift cluster
 
-`ansible-playbook apply -i inventory/`
+`ansible-playbook apply.yml -i inventory/`
 
 This will created the required pipeline to build the application as well as the deployment configurations for the dev and test environments.  The first pipeline should start which will check out the source code, build/package the artifact, and create the container image.  Once the image has been created, it will be deployed to the dev namespace.  There is a manual promotion to the test environment so you will have to click proceed through the pipeline in OpenShift or through Jenkins.
 
 4.  The Swagger API for the application can be found at the following path:  <hostname>/swagger-ui.html.
 
-## Deploy the Delivery Service
+### Deploy the Delivery Service
 
 1. Change directories to the .openshift-applier folder under delivery-scheduler-solver
 
@@ -104,7 +118,7 @@ This will created the required pipeline to build the application as well as the 
 
 3. Install all service objects into the OpenShift cluster
 
-`ansible-playbook apply -i inventory/`
+`ansible-playbook apply.yml -i inventory/`
 
 This will created the required pipeline to build the application as well as the deployment configurations for the dev and test environments.  The first pipeline should start which will check out the source code, build/package the artifact, and create the container image.  Once the image has been created, it will be deployed to the dev namespace.  There is a manual promotion to the test environment so you will have to click proceed through the pipeline in OpenShift or through Jenkins.
 
