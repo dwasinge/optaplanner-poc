@@ -3,9 +3,9 @@
   hosts: seed-hosts
   vars:
     app_name: skills-service
-    ci_cd_namespace: puckboard-dw-ci-cd
-    dev_namespace: puckboard-dw-dev
-    test_namespace: puckboard-dw-test
+    ci_cd_namespace: optaplanner-scheduler-ci-cd
+    dev_namespace: optaplanner-scheduler-dev
+    test_namespace: optaplanner-scheduler-test
     build:
       NAME: "{{app_name}}"
       PIPELINE_SOURCE_REPOSITORY_URL: https://github.com/dwasinge/optaplanner-poc.git

@@ -3,9 +3,9 @@
   hosts: seed-hosts
   vars:
     app_name: delivery-scheduler-solver
-    ci_cd_namespace: puckboard-dw-ci-cd
-    dev_namespace: puckboard-dw-dev
-    test_namespace: puckboard-dw-test
+    ci_cd_namespace: optaplanner-scheduler-ci-cd
+    dev_namespace: optaplanner-scheduler-dev
+    test_namespace: optaplanner-scheduler-test
     build:
       NAME: "{{app_name}}-kieserver"
       PIPELINE_SOURCE_REPOSITORY_URL: https://github.com/dwasinge/optaplanner-poc.git
@@ -14,6 +14,7 @@
       S2I_BASE_IMAGE: rhdm72-kieserver-openshift:1.1
     dev:
       APPLICATION_NAME: "{{app_name}}"
+      KIE_SERVER_PWD: RedHatExecUser
       KIE_SERVER_HTTPS_SECRET: kieserver-app-secret
       KIE_SERVER_CONTAINER_DEPLOYMENT: schedulerContainer=pocs.optaplanner.delivery:delivery-scheduler-solver:1.0.0-SNAPSHOT
       PIPELINES_NAMESPACE: "{{ci_cd_namespace}}"
@@ -23,6 +24,7 @@
       MAVEN_REPO_URL: https://nexus-puckboard-dw-ci-cd.apps.s11.core.rht-labs.com/repository/maven-public/
     test:
       APPLICATION_NAME: "{{app_name}}"
+      KIE_SERVER_PWD: RedHatExecUser
       KIE_SERVER_HTTPS_SECRET: kieserver-app-secret
       KIE_SERVER_CONTAINER_DEPLOYMENT: schedulerContainer=pocs.optaplanner.delivery:delivery-scheduler-solver:1.0.0-SNAPSHOT
       PIPELINES_NAMESPACE: "{{ci_cd_namespace}}"
