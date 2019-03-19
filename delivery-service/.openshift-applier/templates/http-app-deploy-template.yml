@@ -43,12 +43,14 @@ objects:
       spec:
         containers:
         - env:
-            - name: MANAGEMENT_CONTEXT-PATH
-              value: "${MANAGEMENT_CONTEXT-PATH}"
+            - name: SERVER_PORT
+              value: "${SERVER_PORT}"
+            - name: MANAGEMENT_CONTEXT_PATH
+              value: "${MANAGEMENT_CONTEXT_PATH}"
             - name: MANAGEMENT_SERVER_PORT
               value: ${MANAGEMENT_SERVER_PORT}
             - name: AIRCREW_SERVICE_ENDPOINT
-              value: "${AIRCREW_SERVICE_ENDPOINT}""
+              value: "${AIRCREW_SERVICE_ENDPOINT}"
             - name: SKILLS_SERVICE_ENDPOINT
               value: "${SKILLS_SERVICE_ENDPOINT}"
             - name: KIE_SERVER_CLIENT_URL
@@ -65,11 +67,11 @@ objects:
                   name: "${KIE_SERVER_CLIENT_SECRET}"
             - name: KIE_SERVER_CLIENT_TIMEOUT
               value: "${KIE_SERVER_CLIENT_TIMEOUT}"
-            - name: KIE_SERVER_CLIENT_MARSHALLING-FORMAT
-              value: "${KIE_SERVER_CLIENT_MARSHALLING-FORMAT}"
-            - name: KIE_SERVER_CLIENT_EXTRA-CLASSES
-              value: "${KIE_SERVER_CLIENT_EXTRA}"
-        - image: "${NAME}"
+            - name: KIE_SERVER_CLIENT_MARSHALLING_FORMAT
+              value: "${KIE_SERVER_CLIENT_MARSHALLING_FORMAT}"
+            - name: KIE_SERVER_CLIENT_EXTRA_CLASSES
+              value: "${KIE_SERVER_CLIENT_EXTRA_CLASSES}"
+          image: "${NAME}"
           imagePullPolicy: Always
           name: "${NAME}"
           ports:
@@ -155,7 +157,12 @@ parameters:
   displayName: Project/Namespace for Jenkins Pipelines
   description: The project/namespace where the Jenkins executing pipelines is deployed.
   required: true
-- name: MANAGEMENT_CONTEXT
+- name: SERVER_PORT
+  displayName: Application Server Port
+  description: The port the application will liston on
+  required: true
+  value: "8080"
+- name: MANAGEMENT_CONTEXT_PATH
   displayName: Spring context for liveness and health checks
   description: Spring context for liveness and health checks
   required: true
@@ -164,7 +171,7 @@ parameters:
   displayName: Port listening liveness and health checks
   description: Port for liveness and health checks
   required: true
-  value: 8081
+  value: "8081"
 - name: AIRCREW_SERVICE_ENDPOINT
   displayName: Aircrew Service Endpoint
   description: Service used to retrieve aircrew information
@@ -190,12 +197,12 @@ parameters:
   description: Kie server client timeout for REST calls
   required: true
   value: '30000'
-- name: KIE_SERVER_CLIENT_MARSHALLING-FORMAT
+- name: KIE_SERVER_CLIENT_MARSHALLING_FORMAT
   displayName: KIE Server Client Marshalling Format
   description: Kie server client marshalling format - json, xstream, or jaxb
   required: false
   value: xstream
-- name: KIE_SERVER_CLIENT_EXTRA-CLASSES
+- name: KIE_SERVER_CLIENT_EXTRA_CLASSES
   displayName: KIE Server Client Extra Classes
   description: Kie server client extra classes used for marshalling
   required: false
